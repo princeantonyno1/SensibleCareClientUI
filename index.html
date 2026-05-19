@@ -856,193 +856,574 @@
       font-weight: 500
     }
 
-    /* ── INVOICE CARDS ── */
-    .inv-card {
-      background: var(--white);
-      border-radius: var(--radius-xl);
-      padding: 20px;
-      margin-bottom: 12px;
-      border: 1.5px solid var(--slate3);
-      box-shadow: var(--card-shadow);
-    }
+    /* ══════════════════════════════════════════
+       INVOICE SCREEN — PREMIUM REVAMP
+    ══════════════════════════════════════════ */
 
-    .inv-card-pending {
-      border-left: 5px solid var(--coral)
-    }
-
-    .inv-card-paid {
-      border-left: 5px solid var(--green)
-    }
-
-    .inv-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 14px
-    }
-
-    .inv-number {
-      font-size: 16px;
-      font-weight: 900;
-      color: var(--primary)
-    }
-
-    .inv-date {
-      font-size: 12px;
-      color: var(--slate);
-      font-weight: 600;
-      margin-top: 3px
-    }
-
-    .inv-amount-label {
-      font-size: 11px;
-      color: var(--slate);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px
-    }
-
-    .inv-amount {
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--primary);
-      letter-spacing: -0.5px;
-      margin-top: 3px
-    }
-
-    .inv-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end
-    }
-
-    .inv-desc {
-      font-size: 13px;
-      color: var(--slate);
-      font-weight: 600;
-      margin-top: 8px
-    }
-
-    .inv-dl-btn {
-      width: 44px;
-      height: 44px;
-      border: none;
-      border-radius: 12px;
-      background: var(--primary3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
+    /* Hero gradient header */
+    .inv-hero {
+      background: linear-gradient(150deg, #1B2B6B 0%, #2D45B0 45%, #0A9B87 100%);
+      padding: 22px 22px 28px;
+      position: relative;
+      overflow: hidden;
       flex-shrink: 0;
     }
 
-    .inv-dl-btn:active {
-      transform: scale(0.93)
+    .inv-hero::before {
+      content: '';
+      position: absolute;
+      top: -70px;
+      right: -50px;
+      width: 230px;
+      height: 230px;
+      background: radial-gradient(circle, rgba(10, 155, 135, 0.28) 0%, transparent 70%);
+      border-radius: 50%;
     }
 
-    /* ── QUARTER FILTER ── */
-    .q-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .inv-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: -30px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(45, 69, 176, 0.35) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .inv-hero-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .inv-hero-logo {
+      height: 24px;
+    }
+
+    .inv-hero-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--coral);
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(224, 80, 67, 0.45);
+    }
+
+    /* Page label + title */
+    .inv-hero-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .inv-hero-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Two stat pills inside hero */
+    .inv-hero-stats {
+      display: flex;
       gap: 10px;
-      margin-bottom: 18px
+      position: relative;
+      z-index: 2;
     }
 
-    .q-btn {
-      padding: 18px 10px;
+    .inv-hero-stat {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      padding: 12px 14px 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .inv-hero-stat-val {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+
+    .inv-hero-stat.outstanding .inv-hero-stat-val {
+      color: #FCA5A5;
+    }
+
+    .inv-hero-stat.paid .inv-hero-stat-val {
+      color: #6EE7B7;
+    }
+
+    .inv-hero-stat-lbl {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 4px;
+      letter-spacing: 0.4px;
+    }
+
+    /* Alert banner below hero */
+    .inv-alert-bar {
+      background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 100%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      flex-shrink: 0;
+    }
+
+    .inv-alert-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .inv-alert-text {
+      flex: 1;
+    }
+
+    .inv-alert-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .inv-alert-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .inv-pay-now-btn {
+      background: #fff;
+      color: #991B1B;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .inv-pay-now-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Scroll body */
+    .inv-scroll {
+      flex: 1;
+      overflow-y: auto;
+      scrollbar-width: none;
+      padding: 18px 18px 12px;
+      background: var(--bg);
+    }
+
+    .inv-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Filter tabs row */
+    .inv-filter-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .inv-filter-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .inv-pill {
+      flex-shrink: 0;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 2px solid var(--slate3);
+      background: var(--white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--slate);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .inv-pill.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(27, 43, 107, 0.3);
+    }
+
+    /* Section heading */
+    .inv-sec {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--slate);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin: 4px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .inv-sec::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--slate3);
+    }
+
+    /* NEW Invoice card */
+    .inv2-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      margin-bottom: 14px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: 0 4px 20px rgba(27, 43, 107, 0.09);
+      overflow: hidden;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+
+    .inv2-card:active {
+      transform: scale(0.985);
+      box-shadow: 0 2px 10px rgba(27, 43, 107, 0.12);
+    }
+
+    /* Coloured top stripe */
+    .inv2-stripe {
+      height: 6px;
+      width: 100%;
+    }
+
+    .inv2-stripe.pending {
+      background: linear-gradient(90deg, #E05043, #F5856B);
+    }
+
+    .inv2-stripe.paid {
+      background: linear-gradient(90deg, #0A9B87, #34D3BF);
+    }
+
+    .inv2-stripe.approved {
+      background: linear-gradient(90deg, #2D45B0, #5A7AFF);
+    }
+
+    .inv2-body {
+      padding: 18px 18px 16px;
+    }
+
+    /* Card top row */
+    .inv2-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .inv2-icon-num {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .inv2-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .inv2-icon.pending {
+      background: var(--coral2);
+    }
+
+    .inv2-icon.paid {
+      background: var(--teal2);
+    }
+
+    .inv2-icon.approved {
+      background: var(--primary3);
+    }
+
+    .inv2-num {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .inv2-date {
+      font-size: 13px;
+      color: var(--slate);
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    /* Status badge — bigger for elderly */
+    .inv2-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .inv2-badge.pending {
+      background: var(--gold2);
+      color: var(--gold);
+    }
+
+    .inv2-badge.paid {
+      background: var(--teal2);
+      color: var(--teal);
+    }
+
+    .inv2-badge.approved {
+      background: var(--primary3);
+      color: var(--primary);
+    }
+
+    .inv2-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .inv2-badge.pending .inv2-badge-dot {
+      background: var(--gold);
+    }
+
+    .inv2-badge.paid .inv2-badge-dot {
+      background: var(--teal);
+    }
+
+    .inv2-badge.approved .inv2-badge-dot {
+      background: var(--primary);
+    }
+
+    /* Description */
+    .inv2-desc {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    /* Amount row */
+    .inv2-amount-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid var(--slate2);
+    }
+
+    .inv2-amount-lbl {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .inv2-amount {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-top: 4px;
+    }
+
+    .inv2-card.c-pending .inv2-amount {
+      color: var(--coral);
+    }
+
+    .inv2-card.c-paid .inv2-amount {
+      color: var(--teal);
+    }
+
+    .inv2-card.c-approved .inv2-amount {
+      color: var(--primary);
+    }
+
+    /* Download + pay buttons cluster */
+    .inv2-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .inv2-dl-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: var(--primary3);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .inv2-dl-btn:active {
+      transform: scale(0.9);
+    }
+
+    .inv2-pay-btn {
+      height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #C03020, var(--coral));
+      border: none;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(224, 80, 67, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+      white-space: nowrap;
+    }
+
+    .inv2-pay-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Download statement CTA */
+    .inv-dl-cta {
+      width: 100%;
+      padding: 16px 20px;
       border-radius: var(--radius-lg);
+      border: none;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      box-shadow: 0 6px 22px rgba(27, 43, 107, 0.3);
+      margin-bottom: 20px;
+      transition: transform 0.15s;
+    }
+
+    .inv-dl-cta:active {
+      transform: scale(0.97);
+    }
+
+    .inv-dl-cta-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .inv-dl-cta-text {
+      flex: 1;
+    }
+
+    .inv-dl-cta-main {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .inv-dl-cta-hint {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* Quarter filter grid */
+    .inv-q-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .inv-q-btn {
+      padding: 14px 6px 12px;
+      border-radius: 16px;
       border: 2px solid var(--slate3);
       background: var(--white);
       cursor: pointer;
       font-family: 'Plus Jakarta Sans', sans-serif;
       text-align: center;
-      transition: all 0.15s;
-      box-shadow: var(--card-shadow)
+      transition: all 0.18s;
+      box-shadow: 0 2px 8px rgba(27, 43, 107, 0.06);
     }
 
-    .q-btn.sel {
-      background: var(--primary);
-      border-color: var(--primary)
-    }
-
-    .q-label {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--primary)
-    }
-
-    .q-sub {
-      font-size: 12px;
-      color: var(--slate);
-      margin-top: 3px;
-      font-weight: 600
-    }
-
-    .q-btn.sel .q-label,
-    .q-btn.sel .q-sub {
-      color: #fff
-    }
-
-    /* ── FILTER PILLS ── */
-    .filter-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 18px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: none
-    }
-
-    .filter-pill {
-      flex-shrink: 0;
-      padding: 10px 18px;
-      border-radius: 25px;
-      border: 2px solid var(--slate3);
-      background: var(--white);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--slate);
-      cursor: pointer;
-      transition: all 0.15s
-    }
-
-    .filter-pill.active {
-      background: var(--primary);
+    .inv-q-btn.sel {
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
       border-color: var(--primary);
-      color: #fff
+      box-shadow: 0 4px 14px rgba(27, 43, 107, 0.3);
     }
 
-    /* ── SUMMARY TOTAL BANNER ── */
-    .sum-banner {
-      background: linear-gradient(135deg, var(--teal)10%, #0B8A78 100%);
-      border-radius: var(--radius-xl);
-      padding: 20px 22px;
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .sum-banner-label {
-      font-size: 14px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.8)
-    }
-
-    .sum-banner-val {
-      font-size: 32px;
+    .inv-q-label {
+      font-size: 18px;
       font-weight: 900;
-      color: #fff;
-      letter-spacing: -0.5px
+      color: var(--primary);
     }
 
-    .sum-banner-note {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.65);
-      margin-top: 3px;
-      font-weight: 500
+    .inv-q-sub {
+      font-size: 10px;
+      color: var(--slate);
+      margin-top: 2px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .inv-q-btn.sel .inv-q-label,
+    .inv-q-btn.sel .inv-q-sub {
+      color: #fff;
     }
 
     /* ── DIVIDER ── */
@@ -1050,6 +1431,724 @@
       height: 1px;
       background: var(--slate2);
       margin: 6px 0 18px
+    }
+
+    /* ══════════════════════════════════════════
+       BUDGET SCREEN v2 — COMPLETE REDESIGN
+    ══════════════════════════════════════════ */
+
+    /* Hero gradient header */
+    .bv2-hero {
+      background: linear-gradient(150deg, #0f1b5e 0%, #1a3a8f 45%, #0a7a6b 100%);
+      padding: 26px 22px 32px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .bv2-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(10, 155, 135, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .bv2-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -30px;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(45, 69, 176, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .bv2-hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bv2-hero-logo {
+      height: 26px;
+    }
+
+    .bv2-badge-active {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(21, 163, 74, 0.18);
+      border: 1.5px solid rgba(21, 163, 74, 0.45);
+      color: #4ADE80;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 30px;
+      letter-spacing: 0.4px;
+    }
+
+    .bv2-badge-active-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ADE80;
+      box-shadow: 0 0 6px #4ADE80;
+      animation: bv2-pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes bv2-pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.35);
+      }
+    }
+
+    /* Donut ring + figures layout */
+    .bv2-hero-body {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bv2-donut-wrap {
+      position: relative;
+      width: 106px;
+      height: 106px;
+      flex-shrink: 0;
+    }
+
+    .bv2-donut-svg {
+      width: 106px;
+      height: 106px;
+      transform: rotate(-90deg);
+    }
+
+    .bv2-donut-bg-circle {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 10;
+    }
+
+    .bv2-donut-spent-circle {
+      fill: none;
+      stroke: url(#bv2-donut-grad);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 251.2;
+      stroke-dashoffset: 196;
+      /* 78% available → 22% spent */
+      transition: stroke-dashoffset 1.2s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .bv2-donut-centre {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bv2-donut-pct {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .bv2-donut-pct-lbl {
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 700;
+      margin-top: 2px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Figures beside donut */
+    .bv2-figures {
+      flex: 1;
+    }
+
+    .bv2-total-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .bv2-total-amount {
+      font-size: 36px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .bv2-total-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .bv2-mini-stats {
+      display: flex;
+      gap: 10px;
+    }
+
+    .bv2-mini-stat {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      padding: 10px 10px 8px;
+      backdrop-filter: blur(8px);
+    }
+
+    .bv2-mini-val {
+      font-size: 15px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .bv2-mini-lbl {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .bv2-mini-stat.spent .bv2-mini-val {
+      color: #FB923C;
+    }
+
+    .bv2-mini-stat.avail .bv2-mini-val {
+      color: #4ADE80;
+    }
+
+    /* Wavy divider under hero */
+    .bv2-wave {
+      display: block;
+      width: 100%;
+      margin-top: -1px;
+      flex-shrink: 0;
+    }
+
+    /* Scroll body */
+    .bv2-scroll {
+      flex: 1;
+      overflow-y: auto;
+      scrollbar-width: none;
+      padding: 20px 18px 12px;
+      background: var(--bg);
+    }
+
+    .bv2-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Section label */
+    .bv2-sec-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--slate);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .bv2-sec-label::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: var(--slate3);
+      border-radius: 2px;
+    }
+
+    /* Three KPI chips in a row */
+    .bv2-kpi-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .bv2-kpi-chip {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: var(--card-shadow);
+      padding: 14px 10px 12px;
+      text-align: center;
+    }
+
+    .bv2-kpi-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+    }
+
+    .bv2-kpi-val {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .bv2-kpi-lbl {
+      font-size: 10px;
+      color: var(--slate);
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    /* Pathway cards */
+    .bv2-pathway {
+      background: var(--white);
+      border-radius: 24px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bv2-pathway::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      border-radius: 24px 0 0 24px;
+    }
+
+    .bv2-pathway.pw-teal::before {
+      background: linear-gradient(180deg, var(--teal), #34D3BF);
+    }
+
+    .bv2-pathway.pw-navy::before {
+      background: linear-gradient(180deg, var(--primary2), #7C90D4);
+    }
+
+    .bv2-pathway.pw-amber::before {
+      background: linear-gradient(180deg, var(--gold), #F5C26B);
+    }
+
+    .bv2-pw-header {
+      padding-left: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .bv2-pw-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .bv2-pw-sub {
+      font-size: 12px;
+      color: var(--slate);
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    /* big progress bar for pathways */
+    .bv2-prog-outer {
+      background: var(--slate2);
+      border-radius: 14px;
+      height: 18px;
+      margin: 0 0 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bv2-prog-inner {
+      height: 100%;
+      border-radius: 14px;
+      transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
+      position: relative;
+    }
+
+    .bv2-prog-inner.pi-teal {
+      background: linear-gradient(90deg, var(--teal) 0%, #34D3BF 100%);
+    }
+
+    .bv2-prog-inner.pi-navy {
+      background: linear-gradient(90deg, var(--primary2) 0%, #7C90D4 100%);
+    }
+
+    .bv2-prog-inner.pi-amber {
+      background: linear-gradient(90deg, var(--gold) 0%, #F5C26B 100%);
+    }
+
+    .bv2-prog-pct-label {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .bv2-prog-foot {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate);
+      padding-left: 0;
+      margin-bottom: 14px;
+    }
+
+    .bv2-prog-remain {
+      color: var(--teal);
+    }
+
+    .bv2-prog-remain.navy {
+      color: var(--primary2);
+    }
+
+    .bv2-prog-remain.gold {
+      color: var(--gold);
+    }
+
+    /* Pathway detail mini-grid */
+    .bv2-pw-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .bv2-pw-stat {
+      background: var(--slate2);
+      border-radius: 14px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .bv2-pw-stat-val {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .bv2-pw-stat-lbl {
+      font-size: 10px;
+      color: var(--slate);
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    .bv2-pw-stat-val.green {
+      color: var(--green);
+    }
+
+    .bv2-pw-stat-val.gold {
+      color: var(--gold);
+    }
+
+    .bv2-pw-stat-val.coral {
+      color: var(--coral);
+    }
+
+    /* Quarterly tiles */
+    .bv2-q-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .bv2-q-tile {
+      background: var(--white);
+      border-radius: 20px;
+      border: 2px solid var(--slate3);
+      box-shadow: var(--card-shadow);
+      padding: 16px 14px;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .bv2-q-tile.sel {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .bv2-q-tile.sel .bv2-q-qnum {
+      color: #fff;
+    }
+
+    .bv2-q-tile.sel .bv2-q-months {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .bv2-q-tile.sel .bv2-q-amt {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .bv2-q-tile.sel .bv2-q-bar-track {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .bv2-q-tile.sel .bv2-q-bar-fill {
+      background: #4ADE80;
+    }
+
+    .bv2-q-qnum {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .bv2-q-months {
+      font-size: 11px;
+      color: var(--slate);
+      font-weight: 600;
+      margin-top: 2px;
+      margin-bottom: 10px;
+    }
+
+    .bv2-q-bar-track {
+      background: var(--slate2);
+      border-radius: 6px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .bv2-q-bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--teal), #34D3BF);
+    }
+
+    .bv2-q-amt {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--slate);
+    }
+
+    /* Activity / transaction feed */
+    .bv2-activity-card {
+      background: var(--white);
+      border-radius: 24px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .bv2-activity-head {
+      padding: 16px 18px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--slate3);
+    }
+
+    .bv2-activity-head-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bv2-view-all {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary2);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .bv2-tx {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--slate2);
+      transition: background 0.15s;
+    }
+
+    .bv2-tx:last-child {
+      border-bottom: none;
+    }
+
+    .bv2-tx:hover {
+      background: var(--slate2);
+    }
+
+    .bv2-tx-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .bv2-tx-body {
+      flex: 1;
+    }
+
+    .bv2-tx-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .bv2-tx-date {
+      font-size: 11px;
+      color: var(--slate);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .bv2-tx-amt {
+      font-size: 15px;
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .bv2-tx-amt.spent {
+      color: var(--coral);
+    }
+
+    .bv2-tx-amt.committed {
+      color: var(--gold);
+    }
+
+    .bv2-tx-amt.claimed {
+      color: var(--teal);
+    }
+
+    /* CTA Contact card */
+    .bv2-cta-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
+      border-radius: 24px;
+      padding: 20px 20px 18px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 8px 28px rgba(27, 43, 107, 0.28);
+    }
+
+    .bv2-cta-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--coral);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .bv2-cta-body {
+      flex: 1;
+    }
+
+    .bv2-cta-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .bv2-cta-name {
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    .bv2-cta-role {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+    }
+
+    .bv2-cta-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .bv2-cta-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Notice info bar */
+    .bv2-info-bar {
+      background: var(--primary3);
+      border: 1.5px solid var(--slate3);
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .bv2-info-text {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 600;
+      line-height: 1.5;
     }
 
     /* ── NAV BAR ── */
@@ -1238,253 +2337,486 @@
       <div class="nav" id="nav-home"></div>
     </div>
 
-    <!-- ═══ INVOICES ═══ -->
-    <div class="screen" id="s-invoice">
-      <div class="topbar">
-        <div class="topbar-row">
-          <img src="logo_dark.svg" height="28" alt="Sensible Care">
-          <div class="topbar-avatar">BR</div>
+    <!-- ═══ INVOICES v2 ═══ -->
+    <div class="screen" id="s-invoice" style="flex-direction:column;overflow:hidden;">
+
+      <!-- ── HERO HEADER ── -->
+      <div class="inv-hero">
+        <div class="inv-hero-topbar">
+          <img src="logo_dark.svg" class="inv-hero-logo" alt="Sensible Care">
+          <div class="inv-hero-avatar">BR</div>
         </div>
-        <div>
-          <div class="page-label">Billing Records</div>
-          <div class="page-title">My Invoices</div>
+        <div class="inv-hero-label">Billing &amp; Records</div>
+        <div class="inv-hero-title">My Invoices</div>
+        <div class="inv-hero-stats">
+          <div class="inv-hero-stat outstanding">
+            <div class="inv-hero-stat-val">$145.00</div>
+            <div class="inv-hero-stat-lbl">Outstanding</div>
+          </div>
+          <div class="inv-hero-stat paid">
+            <div class="inv-hero-stat-val">$520.50</div>
+            <div class="inv-hero-stat-lbl">Paid This Year</div>
+          </div>
+          <div class="inv-hero-stat" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15)">
+            <div class="inv-hero-stat-val" style="color:#fff;">3</div>
+            <div class="inv-hero-stat-lbl">Total 2026</div>
+          </div>
         </div>
       </div>
-      <div class="scroll">
 
-        <!-- Outstanding alert -->
-        <div class="notice notice-coral" style="border-radius:var(--radius-xl);margin-bottom:14px">
-          <i data-lucide="alert-circle"
-            style="width:22px;height:22px;color:var(--coral);flex-shrink:0;margin-top:1px"></i>
-          <div>
-            <div class="notice-text">You have 1 unpaid invoice</div>
-            <div style="font-size:12px;color:var(--coral);font-weight:700;margin-top:3px">$145.00 due · INV-2026-042
-            </div>
-          </div>
-        </div>
 
-        <!-- Summary totals -->
-        <div class="grid2">
-          <div class="stat-card">
-            <div class="stat-icon-wrap" style="background:var(--coral2)"><i data-lucide="alert-circle"
-                style="width:22px;height:22px;color:var(--coral)"></i></div>
-            <div class="stat-label">Outstanding</div>
-            <div class="stat-value coral">$145.00</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon-wrap" style="background:var(--green2)"><i data-lucide="check-circle-2"
-                style="width:22px;height:22px;color:var(--green)"></i></div>
-            <div class="stat-label">Paid YTD</div>
-            <div class="stat-value green">$520.50</div>
-          </div>
-        </div>
 
-        <button class="action-btn btn-primary" style="margin-bottom:18px">
-          <div class="btn-icon-wrap"><i data-lucide="download" style="width:22px;height:22px;color:#fff"></i></div>
-          <div class="btn-text">
-            <span class="btn-main">Download Statement</span>
-            <span class="btn-hint">Export full history as PDF</span>
+      <!-- ── SCROLL BODY ── -->
+      <div class="inv-scroll">
+
+        <!-- Download statement CTA -->
+        <button class="inv-dl-cta" style="margin-top:4px">
+          <div class="inv-dl-cta-icon">
+            <i data-lucide="file-down" style="width:24px;height:24px;color:#fff"></i>
           </div>
-          <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
+          <div class="inv-dl-cta-text">
+            <div class="inv-dl-cta-main">Download Full Statement</div>
+            <div class="inv-dl-cta-hint">Export all invoices as PDF</div>
+          </div>
+          <i data-lucide="chevron-right" style="width:20px;height:20px;color:rgba(255,255,255,0.5)"></i>
         </button>
 
-        <div class="sec-title"><i data-lucide="calendar" style="width:18px;height:18px"></i> Filter by Quarter — 2026
-        </div>
-
-        <div class="q-grid">
-          <div class="q-btn sel" onclick="selQ(this)">
-            <div class="q-label">Q1</div>
-            <div class="q-sub">Jan – Mar</div>
+        <!-- Quarter filter -->
+        <div class="inv-sec">Filter by Quarter — 2026</div>
+        <div class="inv-q-grid">
+          <div class="inv-q-btn sel" onclick="selInvQ(this)">
+            <div class="inv-q-label">Q1</div>
+            <div class="inv-q-sub">Jan–Mar</div>
           </div>
-          <div class="q-btn" onclick="selQ(this)">
-            <div class="q-label">Q2</div>
-            <div class="q-sub">Apr – Jun</div>
+          <div class="inv-q-btn" onclick="selInvQ(this)">
+            <div class="inv-q-label">Q2</div>
+            <div class="inv-q-sub">Apr–Jun</div>
           </div>
-          <div class="q-btn" onclick="selQ(this)">
-            <div class="q-label">Q3</div>
-            <div class="q-sub">Jul – Sep</div>
+          <div class="inv-q-btn" onclick="selInvQ(this)">
+            <div class="inv-q-label">Q3</div>
+            <div class="inv-q-sub">Jul–Sep</div>
           </div>
-          <div class="q-btn" onclick="selQ(this)">
-            <div class="q-label">Q4</div>
-            <div class="q-sub">Oct – Dec</div>
-          </div>
-        </div>
-
-        <div class="filter-row">
-          <div class="filter-pill active">All Invoices</div>
-          <div class="filter-pill" onclick="selPill(this)">Pending</div>
-          <div class="filter-pill" onclick="selPill(this)">Approved</div>
-          <div class="filter-pill" onclick="selPill(this)">Paid</div>
-        </div>
-
-        <!-- INVOICE 1 - Pending -->
-        <div class="inv-card inv-card-pending">
-          <div class="inv-top">
-            <div>
-              <div class="inv-number">INV-2026-042</div>
-              <div class="inv-date">Issued: 10 May 2026</div>
-            </div>
-            <span class="badge badge-amber"><i data-lucide="clock" style="width:11px;height:11px"></i> Pending</span>
-          </div>
-          <div class="inv-desc">Personal Care Services — May 2026</div>
-          <div class="inv-bottom" style="margin-top:14px">
-            <div>
-              <div class="inv-amount-label">Amount Due</div>
-              <div class="inv-amount">$145.00</div>
-            </div>
-            <button class="inv-dl-btn"><i data-lucide="download"
-                style="width:20px;height:20px;color:var(--primary)"></i></button>
+          <div class="inv-q-btn" onclick="selInvQ(this)">
+            <div class="inv-q-label">Q4</div>
+            <div class="inv-q-sub">Oct–Dec</div>
           </div>
         </div>
 
-        <!-- INVOICE 2 - Paid -->
-        <div class="inv-card inv-card-paid">
-          <div class="inv-top">
-            <div>
-              <div class="inv-number">INV-2026-038</div>
-              <div class="inv-date">Issued: 28 Apr 2026</div>
+        <!-- Status filter pills -->
+        <div class="inv-filter-row">
+          <div class="inv-pill active" onclick="selInvPill(this)">All Invoices</div>
+          <div class="inv-pill" onclick="selInvPill(this)">Pending</div>
+          <div class="inv-pill" onclick="selInvPill(this)">Approved</div>
+          <div class="inv-pill" onclick="selInvPill(this)">Paid</div>
+        </div>
+
+        <!-- ── INVOICE LIST ── -->
+        <div class="inv-sec">Invoice History</div>
+
+        <!-- INVOICE 1 — Pending / Unpaid -->
+        <div class="inv2-card c-pending">
+          <div class="inv2-stripe pending"></div>
+          <div class="inv2-body">
+            <div class="inv2-top">
+              <div class="inv2-icon-num">
+                <div class="inv2-icon pending">
+                  <i data-lucide="heart-pulse" style="width:22px;height:22px;color:var(--coral)"></i>
+                </div>
+                <div>
+                  <div class="inv2-num">INV-2026-042</div>
+                  <div class="inv2-date">Issued: 10 May 2026</div>
+                </div>
+              </div>
+              <div class="inv2-badge pending">
+                <div class="inv2-badge-dot"></div>
+                Pending
+              </div>
             </div>
-            <span class="badge badge-green"><i data-lucide="check-circle" style="width:11px;height:11px"></i>
-              Paid</span>
-          </div>
-          <div class="inv-desc">Community Nursing — April 2026</div>
-          <div class="inv-bottom" style="margin-top:14px">
-            <div>
-              <div class="inv-amount-label">Amount Paid</div>
-              <div class="inv-amount">$320.50</div>
+            <div class="inv2-desc">Personal Care Services — May 2026</div>
+            <div class="inv2-amount-row">
+              <div>
+                <div class="inv2-amount-lbl">Amount Due</div>
+                <div class="inv2-amount">$145.00</div>
+              </div>
+              <div class="inv2-actions">
+                <button class="inv2-dl-btn" title="Download PDF">
+                  <i data-lucide="download" style="width:20px;height:20px;color:var(--primary)"></i>
+                </button>
+              </div>
             </div>
-            <button class="inv-dl-btn"><i data-lucide="download"
-                style="width:20px;height:20px;color:var(--primary)"></i></button>
           </div>
         </div>
 
-        <!-- INVOICE 3 - Paid -->
-        <div class="inv-card inv-card-paid">
-          <div class="inv-top">
-            <div>
-              <div class="inv-number">INV-2026-035</div>
-              <div class="inv-date">Issued: 14 Apr 2026</div>
+        <!-- INVOICE 2 — Paid -->
+        <div class="inv2-card c-paid">
+          <div class="inv2-stripe paid"></div>
+          <div class="inv2-body">
+            <div class="inv2-top">
+              <div class="inv2-icon-num">
+                <div class="inv2-icon paid">
+                  <i data-lucide="stethoscope" style="width:22px;height:22px;color:var(--teal)"></i>
+                </div>
+                <div>
+                  <div class="inv2-num">INV-2026-038</div>
+                  <div class="inv2-date">Issued: 28 Apr 2026</div>
+                </div>
+              </div>
+              <div class="inv2-badge paid">
+                <div class="inv2-badge-dot"></div>
+                Paid
+              </div>
             </div>
-            <span class="badge badge-green"><i data-lucide="check-circle" style="width:11px;height:11px"></i>
-              Paid</span>
-          </div>
-          <div class="inv-desc">Domestic Assistance — April 2026</div>
-          <div class="inv-bottom" style="margin-top:14px">
-            <div>
-              <div class="inv-amount-label">Amount Paid</div>
-              <div class="inv-amount">$200.00</div>
+            <div class="inv2-desc">Community Nursing — April 2026</div>
+            <div class="inv2-amount-row">
+              <div>
+                <div class="inv2-amount-lbl">Amount Paid</div>
+                <div class="inv2-amount">$320.50</div>
+              </div>
+              <div class="inv2-actions">
+                <button class="inv2-dl-btn" title="Download PDF">
+                  <i data-lucide="download" style="width:20px;height:20px;color:var(--primary)"></i>
+                </button>
+              </div>
             </div>
-            <button class="inv-dl-btn"><i data-lucide="download"
-                style="width:20px;height:20px;color:var(--primary)"></i></button>
           </div>
         </div>
 
+        <!-- INVOICE 3 — Paid -->
+        <div class="inv2-card c-paid">
+          <div class="inv2-stripe paid"></div>
+          <div class="inv2-body">
+            <div class="inv2-top">
+              <div class="inv2-icon-num">
+                <div class="inv2-icon paid">
+                  <i data-lucide="home" style="width:22px;height:22px;color:var(--teal)"></i>
+                </div>
+                <div>
+                  <div class="inv2-num">INV-2026-035</div>
+                  <div class="inv2-date">Issued: 14 Apr 2026</div>
+                </div>
+              </div>
+              <div class="inv2-badge paid">
+                <div class="inv2-badge-dot"></div>
+                Paid
+              </div>
+            </div>
+            <div class="inv2-desc">Domestic Assistance — April 2026</div>
+            <div class="inv2-amount-row">
+              <div>
+                <div class="inv2-amount-lbl">Amount Paid</div>
+                <div class="inv2-amount">$200.00</div>
+              </div>
+              <div class="inv2-actions">
+                <button class="inv2-dl-btn" title="Download PDF">
+                  <i data-lucide="download" style="width:20px;height:20px;color:var(--primary)"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INVOICE 4 — Approved -->
+        <div class="inv2-card c-approved">
+          <div class="inv2-stripe approved"></div>
+          <div class="inv2-body">
+            <div class="inv2-top">
+              <div class="inv2-icon-num">
+                <div class="inv2-icon approved">
+                  <i data-lucide="clipboard-check" style="width:22px;height:22px;color:var(--primary2)"></i>
+                </div>
+                <div>
+                  <div class="inv2-num">INV-2026-031</div>
+                  <div class="inv2-date">Issued: 01 Apr 2026</div>
+                </div>
+              </div>
+              <div class="inv2-badge approved">
+                <div class="inv2-badge-dot"></div>
+                Approved
+              </div>
+            </div>
+            <div class="inv2-desc">Allied Health Services — Mar 2026</div>
+            <div class="inv2-amount-row">
+              <div>
+                <div class="inv2-amount-lbl">Amount Approved</div>
+                <div class="inv2-amount">$87.50</div>
+              </div>
+              <div class="inv2-actions">
+                <button class="inv2-dl-btn" title="Download PDF">
+                  <i data-lucide="download" style="width:20px;height:20px;color:var(--primary)"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:8px"></div>
       </div>
+
       <div class="nav" id="nav-invoice"></div>
     </div>
 
-    <!-- ═══ BUDGET SUMMARY ═══ -->
-    <div class="screen" id="s-account">
-      <div class="topbar">
-        <div class="topbar-row">
-          <img src="logo_dark.svg" height="28" alt="Sensible Care">
-          <div class="topbar-avatar">BR</div>
+    <!-- ═══ BUDGET SCREEN v2 ═══ -->
+    <div class="screen" id="s-account" style="flex-direction:column;overflow:hidden;">
+
+      <!-- ── HERO PANEL ── -->
+      <div class="bv2-hero">
+        <div class="bv2-hero-top">
+          <img src="logo_dark.svg" class="bv2-hero-logo" alt="Sensible Care">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="bv2-badge-active">
+              <div class="bv2-badge-active-dot"></div>
+              Plan Active
+            </div>
+            <div class="topbar-avatar" style="width:38px;height:38px;font-size:13px">BR</div>
+          </div>
         </div>
-        <div>
-          <div class="page-label">Financial Overview</div>
-          <div class="page-title">Budget Summary</div>
+
+        <div class="bv2-hero-body">
+          <!-- SVG Donut Ring -->
+          <div class="bv2-donut-wrap">
+            <svg class="bv2-donut-svg" viewBox="0 0 106 106">
+              <defs>
+                <linearGradient id="bv2-donut-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#0A9B87" />
+                  <stop offset="100%" stop-color="#34D3BF" />
+                </linearGradient>
+              </defs>
+              <circle class="bv2-donut-bg-circle" cx="53" cy="53" r="40" />
+              <circle class="bv2-donut-spent-circle" cx="53" cy="53" r="40" />
+            </svg>
+            <div class="bv2-donut-centre">
+              <div class="bv2-donut-pct">22%</div>
+              <div class="bv2-donut-pct-lbl">USED</div>
+            </div>
+          </div>
+
+          <!-- Figures -->
+          <div class="bv2-figures">
+            <div class="bv2-total-eyebrow">Total Care Budget</div>
+            <div class="bv2-total-amount">$6,334</div>
+            <div class="bv2-total-sub">Barry Reaper · 2 Pathways · 2026</div>
+            <div class="bv2-mini-stats">
+              <div class="bv2-mini-stat spent">
+                <div class="bv2-mini-val">$3,763</div>
+                <div class="bv2-mini-lbl">Spent</div>
+              </div>
+              <div class="bv2-mini-stat avail">
+                <div class="bv2-mini-val">$2,571</div>
+                <div class="bv2-mini-lbl">Available</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="scroll">
 
-        <div class="card-hero">
-          <div class="hero-eyebrow">Total Budget</div>
-          <div class="hero-value">$6,334.97</div>
-          <div class="hero-sub">Barry Reaper · Saint Helena VIC 3088</div>
-          <div class="hero-chips">
-            <div class="hero-chip"><i data-lucide="wallet" style="width:13px;height:13px"></i> 2 Pathways</div>
-            <div class="hero-chip"><i data-lucide="activity" style="width:13px;height:13px"></i> Active</div>
+      <!-- Wavy wave separator -->
+      <svg class="bv2-wave" viewBox="0 0 375 28" preserveAspectRatio="none" style="height:28px;background:#0a7a6b;">
+        <path d="M0,28 C60,0 120,28 187.5,14 C255,0 315,28 375,14 L375,28 Z" fill="#F4F7FF" />
+      </svg>
+
+      <!-- ── SCROLL BODY ── -->
+      <div class="bv2-scroll">
+
+        <!-- KPI row -->
+        <div class="bv2-kpi-row">
+          <div class="bv2-kpi-chip">
+            <div class="bv2-kpi-icon" style="background:var(--green2)">
+              <i data-lucide="trending-up" style="width:18px;height:18px;color:var(--green)"></i>
+            </div>
+            <div class="bv2-kpi-val" style="color:var(--green)">$2,571</div>
+            <div class="bv2-kpi-lbl">Available</div>
+          </div>
+          <div class="bv2-kpi-chip">
+            <div class="bv2-kpi-icon" style="background:var(--gold2)">
+              <i data-lucide="clock" style="width:18px;height:18px;color:var(--gold)"></i>
+            </div>
+            <div class="bv2-kpi-val" style="color:var(--gold)">$936</div>
+            <div class="bv2-kpi-lbl">Committed</div>
+          </div>
+          <div class="bv2-kpi-chip">
+            <div class="bv2-kpi-icon" style="background:var(--primary3)">
+              <i data-lucide="file-text" style="width:18px;height:18px;color:var(--primary2)"></i>
+            </div>
+            <div class="bv2-kpi-val">$217</div>
+            <div class="bv2-kpi-lbl">Claimed</div>
           </div>
         </div>
 
-        <div class="grid2">
-          <div class="stat-card">
-            <div class="stat-icon-wrap" style="background:var(--green2)"><i data-lucide="trending-up"
-                style="width:22px;height:22px;color:var(--green)"></i></div>
-            <div class="stat-label">Remaining</div>
-            <div class="stat-value green">$2,571</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon-wrap" style="background:var(--primary3)"><i data-lucide="file-text"
-                style="width:22px;height:22px;color:var(--primary)"></i></div>
-            <div class="stat-label">Claimed</div>
-            <div class="stat-value">$217.00</div>
-          </div>
+        <!-- Section: Pathways -->
+        <div class="bv2-sec-label">
+          <i data-lucide="layers" style="width:14px;height:14px;color:var(--slate)"></i>
+          Budget Pathways
         </div>
 
-        <!-- Spending summary banner -->
-        <div class="sum-banner">
-          <div>
-            <div class="sum-banner-label">Total Spent This Year</div>
-            <div class="sum-banner-val">$3,763.97</div>
-            <div class="sum-banner-note">Across all care pathways</div>
-          </div>
-          <i data-lucide="trending-up" style="width:40px;height:40px;color:rgba(255,255,255,0.35)"></i>
-        </div>
-
-        <div class="sec-title"><i data-lucide="layers" style="width:18px;height:18px"></i> Budget Pathways</div>
-
-        <!-- Pathway 1 -->
-        <div class="bcard">
-          <div class="bcard-header">
+        <!-- Pathway 1: Ongoing Quarterly -->
+        <div class="bv2-pathway pw-teal">
+          <div class="bv2-pw-header">
             <div>
-              <div class="bcard-title">Ongoing Quarterly</div>
-              <div class="bcard-sub">Total Budget: $4,334.97</div>
+              <div class="bv2-pw-title">Ongoing Quarterly</div>
+              <div class="bv2-pw-sub">Personal Care Services · Q2 2026</div>
             </div>
-            <span class="badge badge-green"><i data-lucide="check-circle" style="width:11px;height:11px"></i> 22%
-              used</span>
+            <span class="badge badge-green" style="font-size:11px">
+              <i data-lucide="check-circle" style="width:12px;height:12px"></i> 22% used
+            </span>
           </div>
-          <div class="prog-track">
-            <div class="prog-fill" style="width:22%"></div>
-          </div>
-          <div class="prog-foot">
-            <span class="prog-left">$571.77 remaining</span>
-            <span class="prog-right">$936 committed</span>
-          </div>
-          <div class="bdetail-grid">
-            <div class="bdetail-cell">
-              <div class="bdetail-label">Claimed</div>
-              <div class="bdetail-val">$217.00</div>
+          <div class="bv2-prog-outer">
+            <div class="bv2-prog-inner pi-teal" style="width:22%">
+              <span class="bv2-prog-pct-label">22%</span>
             </div>
-            <div class="bdetail-cell">
-              <div class="bdetail-label">Committed</div>
-              <div class="bdetail-val gold">$936.00</div>
+          </div>
+          <div class="bv2-prog-foot">
+            <span class="bv2-prog-remain">$571.77 remaining</span>
+            <span>of $4,334.97</span>
+          </div>
+          <div class="bv2-pw-detail">
+            <div class="bv2-pw-stat">
+              <div class="bv2-pw-stat-val coral">$3,398</div>
+              <div class="bv2-pw-stat-lbl">Unspent</div>
+            </div>
+            <div class="bv2-pw-stat">
+              <div class="bv2-pw-stat-val gold">$936</div>
+              <div class="bv2-pw-stat-lbl">Committed</div>
+            </div>
+            <div class="bv2-pw-stat">
+              <div class="bv2-pw-stat-val green">$217</div>
+              <div class="bv2-pw-stat-lbl">Claimed</div>
             </div>
           </div>
         </div>
 
-        <!-- Pathway 2 -->
-        <div class="bcard">
-          <div class="bcard-header">
+        <!-- Pathway 2: Assistive Technology -->
+        <div class="bv2-pathway pw-navy">
+          <div class="bv2-pw-header">
             <div>
-              <div class="bcard-title">Assistive Technology</div>
-              <div class="bcard-sub">Total Budget: $2,000.00</div>
+              <div class="bv2-pw-title">Assistive Technology</div>
+              <div class="bv2-pw-sub">Equipment &amp; Devices · 2026</div>
             </div>
-            <span class="badge badge-navy">Not started</span>
+            <span class="badge badge-navy" style="font-size:11px">
+              <i data-lucide="circle" style="width:12px;height:12px"></i> Not started
+            </span>
           </div>
-          <div class="prog-track">
-            <div class="prog-fill" style="width:1%"></div>
+          <div class="bv2-prog-outer">
+            <div class="bv2-prog-inner pi-navy" style="width:2%"></div>
           </div>
-          <div class="prog-foot">
-            <span class="prog-left">$2,000 remaining</span>
-            <span class="prog-right">0% used</span>
+          <div class="bv2-prog-foot">
+            <span class="bv2-prog-remain navy">$2,000 fully available</span>
+            <span>of $2,000.00</span>
+          </div>
+          <div class="bv2-pw-detail">
+            <div class="bv2-pw-stat">
+              <div class="bv2-pw-stat-val">$2,000</div>
+              <div class="bv2-pw-stat-lbl">Remaining</div>
+            </div>
+            <div class="bv2-pw-stat">
+              <div class="bv2-pw-stat-val">$0</div>
+              <div class="bv2-pw-stat-lbl">Committed</div>
+            </div>
+            <div class="bv2-pw-stat">
+              <div class="bv2-pw-stat-val">$0</div>
+              <div class="bv2-pw-stat-lbl">Claimed</div>
+            </div>
           </div>
         </div>
 
-        <div class="notice notice-blue">
-          <i data-lucide="info" style="width:20px;height:20px;color:var(--primary2);flex-shrink:0;margin-top:1px"></i>
-          <span class="notice-text">Budget resets quarterly. Contact your Care Manager for a full breakdown of
-            expenses.</span>
+        <!-- Section: Quarterly Breakdown -->
+        <div class="bv2-sec-label" style="margin-top:4px">
+          <i data-lucide="calendar" style="width:14px;height:14px;color:var(--slate)"></i>
+          Quarterly Spending
+        </div>
+
+        <div class="bv2-q-grid">
+          <div class="bv2-q-tile sel" onclick="bv2SelQ(this)">
+            <div class="bv2-q-qnum">Q1</div>
+            <div class="bv2-q-months">Jan – Mar</div>
+            <div class="bv2-q-bar-track">
+              <div class="bv2-q-bar-fill" style="width:68%"></div>
+            </div>
+            <div class="bv2-q-amt">$1,287 spent</div>
+          </div>
+          <div class="bv2-q-tile" onclick="bv2SelQ(this)">
+            <div class="bv2-q-qnum">Q2</div>
+            <div class="bv2-q-months">Apr – Jun</div>
+            <div class="bv2-q-bar-track">
+              <div class="bv2-q-bar-fill" style="width:32%"></div>
+            </div>
+            <div class="bv2-q-amt">$665 spent</div>
+          </div>
+          <div class="bv2-q-tile" onclick="bv2SelQ(this)">
+            <div class="bv2-q-qnum">Q3</div>
+            <div class="bv2-q-months">Jul – Sep</div>
+            <div class="bv2-q-bar-track">
+              <div class="bv2-q-bar-fill" style="width:0%"></div>
+            </div>
+            <div class="bv2-q-amt">—</div>
+          </div>
+          <div class="bv2-q-tile" onclick="bv2SelQ(this)">
+            <div class="bv2-q-qnum">Q4</div>
+            <div class="bv2-q-months">Oct – Dec</div>
+            <div class="bv2-q-bar-track">
+              <div class="bv2-q-bar-fill" style="width:0%"></div>
+            </div>
+            <div class="bv2-q-amt">—</div>
+          </div>
+        </div>
+
+        <!-- Section: Recent Activity -->
+        <div class="bv2-sec-label">
+          <i data-lucide="activity" style="width:14px;height:14px;color:var(--slate)"></i>
+          Recent Activity
+        </div>
+
+        <div class="bv2-activity-card">
+          <div class="bv2-activity-head">
+            <div class="bv2-activity-head-title">
+              <i data-lucide="receipt" style="width:16px;height:16px;color:var(--primary2)"></i>
+              Transactions
+            </div>
+            <span class="bv2-view-all" onclick="show('invoice')">View all →</span>
+          </div>
+
+          <div class="bv2-tx">
+            <div class="bv2-tx-icon" style="background:var(--coral2)">
+              <i data-lucide="alert-circle" style="width:20px;height:20px;color:var(--coral)"></i>
+            </div>
+            <div class="bv2-tx-body">
+              <div class="bv2-tx-title">Personal Care Services</div>
+              <div class="bv2-tx-date">10 May 2026 · INV-2026-042 · Pending</div>
+            </div>
+            <div class="bv2-tx-amt spent">–$145.00</div>
+          </div>
+
+          <div class="bv2-tx">
+            <div class="bv2-tx-icon" style="background:var(--green2)">
+              <i data-lucide="check-circle-2" style="width:20px;height:20px;color:var(--green)"></i>
+            </div>
+            <div class="bv2-tx-body">
+              <div class="bv2-tx-title">Community Nursing</div>
+              <div class="bv2-tx-date">28 Apr 2026 · INV-2026-038 · Paid</div>
+            </div>
+            <div class="bv2-tx-amt claimed">–$320.50</div>
+          </div>
+
+          <div class="bv2-tx">
+            <div class="bv2-tx-icon" style="background:var(--primary3)">
+              <i data-lucide="home" style="width:20px;height:20px;color:var(--primary2)"></i>
+            </div>
+            <div class="bv2-tx-body">
+              <div class="bv2-tx-title">Domestic Assistance</div>
+              <div class="bv2-tx-date">14 Apr 2026 · INV-2026-035 · Paid</div>
+            </div>
+            <div class="bv2-tx-amt claimed">–$200.00</div>
+          </div>
+
+          <div class="bv2-tx">
+            <div class="bv2-tx-icon" style="background:var(--gold2)">
+              <i data-lucide="clock" style="width:20px;height:20px;color:var(--gold)"></i>
+            </div>
+            <div class="bv2-tx-body">
+              <div class="bv2-tx-title">Transport Support</div>
+              <div class="bv2-tx-date">2 Mar 2026 · Committed · In progress</div>
+            </div>
+            <div class="bv2-tx-amt committed">$936.00</div>
+          </div>
         </div>
 
       </div>
@@ -1719,7 +3051,10 @@
     function show(tab) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('s-' + tab).classList.add('active'); lucide.createIcons() }
     function selQ(el) { document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('sel')); el.classList.add('sel') }
     function selPill(el) { el.closest('.filter-row').querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active')); el.classList.add('active') }
+    function selInvQ(el) { el.closest('.inv-q-grid').querySelectorAll('.inv-q-btn').forEach(b => b.classList.remove('sel')); el.classList.add('sel') }
+    function selInvPill(el) { el.closest('.inv-filter-row').querySelectorAll('.inv-pill').forEach(p => p.classList.remove('active')); el.classList.add('active') }
     function selC(el, g) { el.closest('.choice-grid').querySelectorAll('.choice-btn').forEach(b => b.classList.remove('sel')); el.classList.add('sel'); lucide.createIcons() }
+    function bv2SelQ(el) { el.closest('.bv2-q-grid').querySelectorAll('.bv2-q-tile').forEach(t => t.classList.remove('sel')); el.classList.add('sel') }
     function togFn(id) { const t = document.getElementById(id), k = t.querySelector('.tog-knob'), on = k.style.left === '30px'; k.style.left = on ? '4px' : '30px'; t.style.background = on ? 'var(--slate3)' : 'var(--teal)' }
     function updateScale() {
       const hScale = (window.innerHeight - 48) / 780;
