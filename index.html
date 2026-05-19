@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+  <meta name="description" content="Sensible Care Client Portal - Manage your care budget, invoices and support team">
+  <title>Sensible Care | Client Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
@@ -14,46 +16,52 @@
       -webkit-tap-highlight-color: transparent
     }
 
+    :root {
+      --primary: #1B2B6B;
+      --primary2: #2D45B0;
+      --primary3: #EEF1FB;
+      --coral: #E05043;
+      --coral2: #FDF0EF;
+      --teal: #0A9B87;
+      --teal2: #E0F7F4;
+      --gold: #C8892A;
+      --gold2: #FDF3E3;
+      --slate: #5A6A85;
+      --slate2: #F2F5FB;
+      --slate3: #DDE3F0;
+      --red: #DC2626;
+      --red2: #FEF2F2;
+      --green: #15A34A;
+      --green2: #EDFAF3;
+      --white: #FFFFFF;
+      --bg: #F4F7FF;
+      --card-shadow: 0 2px 16px rgba(27, 43, 107, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background: #0f172a;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, #0f1f5c 0%, #1a3a6b 60%, #0a4a5a 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
       padding: 24px 0;
       box-sizing: border-box;
       overflow: hidden;
     }
 
-    :root {
-      --navy: #1B3A6B;
-      --navy2: #2D5FA6;
-      --navy3: #EEF4FF;
-      --teal: #0F9E8A;
-      --teal2: #E0F7F4;
-      --gold: #C8922A;
-      --gold2: #FDF3E3;
-      --slate: #64748B;
-      --slate2: #F1F5F9;
-      --slate3: #E2E8F0;
-      --red: #DC2626;
-      --red2: #FEF2F2;
-      --green: #16A34A;
-      --green2: #F0FDF4;
-      --white: #FFFFFF;
-      --bg: #F8FAFC;
-    }
-
     .wrap {
-      width: 360px;
+      width: 375px;
       height: 780px;
       background: var(--bg);
-      border-radius: 40px;
+      border-radius: 44px;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 60px 120px rgba(0, 0, 0, 0.55), 0 0 0 1.5px rgba(255, 255, 255, 0.12);
       flex-shrink: 0;
       transform-origin: center center;
     }
@@ -63,21 +71,21 @@
       flex-direction: column;
       height: 100%;
       overflow-y: auto;
-      scrollbar-width: none;
+      scrollbar-width: none
     }
 
     .screen::-webkit-scrollbar {
-      display: none;
+      display: none
     }
 
     .screen.active {
       display: flex
     }
 
-    /* TOP BAR */
+    /* ── TOPBAR ── */
     .topbar {
-      background: var(--navy);
-      padding: 22px 22px 18px;
+      background: linear-gradient(140deg, var(--primary) 0%, var(--primary2) 100%);
+      padding: 20px 22px 18px;
       flex-shrink: 0;
       position: sticky;
       top: 0;
@@ -87,170 +95,175 @@
     .topbar-row {
       display: flex;
       align-items: center;
-      justify-content: space-between
+      justify-content: space-between;
+      margin-bottom: 16px
     }
 
     .topbar-greeting {
-      color: rgba(255, 255, 255, 0.65);
-      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.3px;
       margin-bottom: 2px
     }
 
     .topbar-name {
       color: #fff;
-      font-size: 20px;
-      font-weight: 700;
+      font-size: 22px;
+      font-weight: 800;
       line-height: 1.2
     }
 
     .topbar-avatar {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: var(--coral);
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
       font-size: 15px;
-      font-weight: 700;
-      flex-shrink: 0
+      font-weight: 800;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(224, 80, 67, 0.4);
     }
 
     .topbar-sub {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.45);
       font-size: 12px;
       font-weight: 400;
-      margin-top: 4px
+      margin-top: 3px
     }
 
-    /* SCROLL AREA */
+    /* ── SCROLL AREA ── */
     .scroll {
       flex: 1;
-      padding: 18px 16px 20px;
+      padding: 20px 18px 24px
     }
 
-    /* CARDS */
-    .card {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 14px;
-      border: 1px solid var(--slate3)
-    }
-
+    /* ── HERO CARD ── */
     .card-hero {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
-      border: none;
+      background: linear-gradient(145deg, var(--primary) 0%, var(--primary2) 70%, #1a5a8a 100%);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      margin-bottom: 16px;
       position: relative;
-      overflow: hidden
+      overflow: hidden;
+      border: none;
     }
 
     .card-hero::before {
       content: '';
       position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 160px;
-      height: 160px;
+      top: -50px;
+      right: -50px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.04)
+      background: rgba(255, 255, 255, 0.05)
     }
 
     .card-hero::after {
       content: '';
       position: absolute;
-      bottom: -30px;
-      right: 20px;
-      width: 100px;
-      height: 100px;
+      bottom: -40px;
+      right: 10px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.03)
+      background: rgba(224, 80, 67, 0.15)
     }
 
-    .hero-label {
+    .hero-eyebrow {
       color: rgba(255, 255, 255, 0.6);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       margin-bottom: 6px
     }
 
     .hero-value {
       color: #fff;
-      font-size: 38px;
-      font-weight: 800;
+      font-size: 42px;
+      font-weight: 900;
       line-height: 1;
-      letter-spacing: -0.5px
+      letter-spacing: -1px
     }
 
     .hero-sub {
-      color: rgba(255, 255, 255, 0.55);
-      font-size: 13px;
-      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      font-weight: 500;
       margin-top: 8px
     }
 
-    .hero-badges {
+    .hero-chips {
       display: flex;
       gap: 8px;
-      margin-top: 14px
+      margin-top: 14px;
+      flex-wrap: wrap
     }
 
-    .hero-badge {
+    .hero-chip {
       background: rgba(255, 255, 255, 0.12);
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.9);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 5px 12px;
       border-radius: 20px;
       display: flex;
       align-items: center;
-      gap: 5px
+      gap: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.15)
     }
 
-    /* GRID */
+    .hero-chip-coral {
+      background: rgba(224, 80, 67, 0.25);
+      border-color: rgba(224, 80, 67, 0.4);
+      color: #FFB3AE
+    }
+
+    /* ── STAT GRID ── */
     .grid2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px
+      gap: 12px;
+      margin-bottom: 16px
     }
 
     .stat-card {
       background: var(--white);
-      border-radius: 18px;
-      padding: 16px;
-      border: 1px solid var(--slate3)
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: var(--card-shadow);
     }
 
     .stat-icon-wrap {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 10px
+      margin-bottom: 12px
     }
 
     .stat-label {
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 700;
       color: var(--slate);
       text-transform: uppercase;
-      letter-spacing: 0.3px
+      letter-spacing: 0.5px
     }
 
     .stat-value {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--navy);
-      margin-top: 3px;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-top: 4px;
       letter-spacing: -0.5px
     }
 
@@ -262,50 +275,74 @@
       color: var(--gold)
     }
 
-    /* SECTION TITLE */
+    .stat-value.coral {
+      color: var(--coral)
+    }
+
+    /* ── SECTION TITLE ── */
     .sec-title {
       font-size: 18px;
-      font-weight: 700;
-      color: var(--navy);
-      margin: 22px 0 12px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 22px 0 14px;
       display: flex;
       align-items: center;
       gap: 8px
     }
 
     .sec-title i {
-      color: var(--navy2)
+      color: var(--primary2)
     }
 
-    /* BUDGET CARD */
-    .budget-head {
+    /* ── WHITE CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      margin-bottom: 14px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: var(--card-shadow);
+    }
+
+    /* ── BUDGET CARDS ── */
+    .bcard {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      margin-bottom: 14px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: var(--card-shadow)
+    }
+
+    .bcard-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 8px
+      margin-bottom: 14px
     }
 
-    .budget-name {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--navy)
+    .bcard-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--primary)
     }
 
-    .budget-total {
-      font-size: 14px;
+    .bcard-sub {
+      font-size: 13px;
       color: var(--slate);
-      margin-top: 4px;
-      font-weight: 500
+      font-weight: 500;
+      margin-top: 3px
     }
 
+    /* badges */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 700
+      gap: 5px;
+      padding: 6px 13px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 800
     }
 
     .badge-green {
@@ -314,8 +351,8 @@
     }
 
     .badge-navy {
-      background: var(--navy3);
-      color: var(--navy)
+      background: var(--primary3);
+      color: var(--primary)
     }
 
     .badge-amber {
@@ -323,30 +360,40 @@
       color: var(--gold)
     }
 
+    .badge-coral {
+      background: var(--coral2);
+      color: var(--coral)
+    }
+
+    /* progress */
     .prog-track {
       background: var(--slate2);
-      border-radius: 8px;
-      height: 12px;
-      margin: 16px 0 10px;
+      border-radius: 10px;
+      height: 14px;
+      margin: 12px 0 10px;
       overflow: hidden
     }
 
     .prog-fill {
       height: 100%;
-      border-radius: 8px;
+      border-radius: 10px;
       background: linear-gradient(90deg, var(--teal), #34D3BF);
-      transition: width 0.8s ease
+      transition: width 1s ease
     }
 
     .prog-fill-amber {
-      background: linear-gradient(90deg, #C8922A, #F5C26B)
+      background: linear-gradient(90deg, var(--gold), #F5C26B)
+    }
+
+    .prog-fill-coral {
+      background: linear-gradient(90deg, var(--coral), #F5856B)
     }
 
     .prog-foot {
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
-      font-weight: 600
+      font-size: 13px;
+      font-weight: 700
     }
 
     .prog-left {
@@ -357,64 +404,98 @@
       color: var(--slate)
     }
 
-    /* ACTION BUTTONS */
+    /* budget detail grid */
+    .bdetail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px
+    }
+
+    .bdetail-cell {
+      background: var(--slate2);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center
+    }
+
+    .bdetail-label {
+      font-size: 12px;
+      color: var(--slate);
+      font-weight: 600
+    }
+
+    .bdetail-val {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-top: 4px
+    }
+
+    .bdetail-val.green {
+      color: var(--green)
+    }
+
+    .bdetail-val.gold {
+      color: var(--gold)
+    }
+
+    /* ── ACTION BUTTONS ── */
     .action-btn {
       width: 100%;
-      padding: 16px 18px;
-      border-radius: 18px;
+      padding: 17px 18px;
+      border-radius: var(--radius-lg);
       border: none;
       cursor: pointer;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       display: flex;
       align-items: center;
       gap: 14px;
       margin-bottom: 10px;
-      transition: all 0.2s;
+      transition: transform 0.15s, box-shadow 0.15s;
       position: relative;
-      overflow: hidden
-    }
-
-    .action-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0);
-      transition: background 0.15s
-    }
-
-    .action-btn:hover::before {
-      background: rgba(255, 255, 255, 0.1)
+      overflow: hidden;
     }
 
     .action-btn:active {
       transform: scale(0.97)
     }
 
-    .btn-navy {
-      background: linear-gradient(135deg, var(--navy), var(--navy2));
-      box-shadow: 0 4px 20px rgba(27, 58, 107, 0.3)
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      box-shadow: 0 6px 22px rgba(27, 43, 107, 0.35)
     }
 
     .btn-teal {
       background: linear-gradient(135deg, #0B8A78, var(--teal));
-      box-shadow: 0 4px 20px rgba(15, 158, 138, 0.3)
+      box-shadow: 0 6px 22px rgba(10, 155, 135, 0.35)
+    }
+
+    .btn-coral {
+      background: linear-gradient(135deg, #C03020, var(--coral));
+      box-shadow: 0 6px 22px rgba(224, 80, 67, 0.35)
     }
 
     .btn-outline {
       background: var(--white);
-      border: 2px solid var(--navy) !important
+      border: 2px solid var(--primary) !important
     }
 
     .btn-green {
-      background: linear-gradient(135deg, #15803D, var(--green));
-      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3)
+      background: linear-gradient(135deg, #0f8a3a, var(--green));
+      box-shadow: 0 6px 22px rgba(21, 163, 74, 0.35)
+    }
+
+    .btn-red {
+      background: linear-gradient(135deg, #991b1b, var(--red));
+      box-shadow: 0 6px 22px rgba(220, 38, 38, 0.3)
     }
 
     .btn-icon-wrap {
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.18);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -422,7 +503,7 @@
     }
 
     .btn-outline .btn-icon-wrap {
-      background: var(--navy3)
+      background: var(--primary3)
     }
 
     .btn-text {
@@ -433,7 +514,7 @@
 
     .btn-main {
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 800;
       color: #fff;
       line-height: 1.2
     }
@@ -441,12 +522,12 @@
     .btn-hint {
       font-size: 12px;
       color: rgba(255, 255, 255, 0.65);
-      font-weight: 400;
+      font-weight: 500;
       margin-top: 2px
     }
 
     .btn-outline .btn-main {
-      color: var(--navy)
+      color: var(--primary)
     }
 
     .btn-outline .btn-hint {
@@ -462,12 +543,12 @@
       color: var(--slate)
     }
 
-    /* INFO ROWS */
+    /* ── INFO ROWS ── */
     .info-row {
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 14px 0;
+      padding: 15px 0;
       border-bottom: 1px solid var(--slate2)
     }
 
@@ -476,9 +557,9 @@
     }
 
     .info-icon-wrap {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -486,135 +567,137 @@
     }
 
     .info-label {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--slate);
-      font-weight: 500
+      font-weight: 600
     }
 
     .info-val {
       font-size: 16px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-top: 1px
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 2px
     }
 
-    /* CARE HERO */
+    /* ── CARE HERO ── */
     .care-hero-card {
-      background: linear-gradient(135deg, var(--navy) 0%, #0D2448 100%);
+      background: linear-gradient(145deg, var(--primary) 0%, #0D2448 100%);
       border: none;
       text-align: center;
-      padding: 28px 20px
+      padding: 30px 20px
     }
 
     .care-avatar {
-      width: 88px;
-      height: 88px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      border: 3px solid rgba(255, 255, 255, 0.25);
+      background: var(--coral);
+      border: 3px solid rgba(255, 255, 255, 0.3);
       margin: 0 auto 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 28px;
-      font-weight: 800;
-      color: #fff
+      font-weight: 900;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(224, 80, 67, 0.4)
     }
 
     .care-name {
       font-size: 22px;
-      font-weight: 800;
+      font-weight: 900;
       color: #fff
     }
 
     .care-role {
-      font-size: 13px;
+      font-size: 14px;
       color: rgba(255, 255, 255, 0.6);
       margin-top: 4px;
-      margin-bottom: 12px
+      margin-bottom: 14px
     }
 
     .active-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       background: rgba(22, 163, 74, 0.2);
       border: 1px solid rgba(22, 163, 74, 0.4);
       color: #4ADE80;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: 20px
     }
 
     .active-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #4ADE80
     }
 
-    /* FORMS */
+    /* ── FORMS ── */
     .field-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 6px
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 7px
     }
 
     .big-input {
       width: 100%;
-      height: 54px;
-      border-radius: 14px;
-      border: 1.5px solid var(--slate3);
+      height: 56px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--slate3);
       font-size: 16px;
-      padding: 0 16px;
-      font-family: 'Poppins', sans-serif;
-      color: var(--navy);
+      padding: 0 18px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--primary);
       background: var(--bg);
       outline: none;
-      margin-bottom: 14px;
-      transition: border 0.2s
+      margin-bottom: 16px;
+      transition: border 0.2s;
+      font-weight: 600
     }
 
     .big-input:focus {
-      border-color: var(--navy)
+      border-color: var(--primary)
     }
 
     .choice-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 16px
     }
 
     .choice-btn {
-      padding: 14px 8px;
-      border-radius: 14px;
+      padding: 16px 8px;
+      border-radius: var(--radius-md);
       border: 2px solid var(--slate3);
       background: var(--white);
       cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
       color: var(--slate);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       transition: all 0.15s
     }
 
     .choice-btn.sel {
-      background: var(--navy);
-      border-color: var(--navy);
+      background: var(--primary);
+      border-color: var(--primary);
       color: #fff
     }
 
     .choice-icon-wrap {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
       background: var(--slate2);
       display: flex;
       align-items: center;
@@ -623,14 +706,15 @@
     }
 
     .choice-btn.sel .choice-icon-wrap {
-      background: rgba(255, 255, 255, 0.15)
+      background: rgba(255, 255, 255, 0.18)
     }
 
+    /* toggles */
     .tog-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0;
+      padding: 16px 0;
       border-bottom: 1px solid var(--slate2)
     }
 
@@ -639,21 +723,21 @@
     }
 
     .tog-label {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--navy)
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary)
     }
 
     .tog-sub {
       font-size: 12px;
       color: var(--slate);
-      margin-top: 2px
+      margin-top: 3px
     }
 
     .tog {
-      width: 54px;
-      height: 28px;
-      border-radius: 14px;
+      width: 56px;
+      height: 30px;
+      border-radius: 15px;
       border: none;
       cursor: pointer;
       position: relative;
@@ -662,40 +746,45 @@
     }
 
     .tog-knob {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: #fff;
       position: absolute;
       top: 4px;
       transition: left 0.2s;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25)
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)
     }
 
-    /* NOTICE */
+    /* ── NOTICES ── */
     .notice {
-      border-radius: 14px;
-      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      padding: 16px;
       margin-bottom: 14px;
       display: flex;
-      gap: 10px;
+      gap: 11px;
       align-items: flex-start
     }
 
     .notice-amber {
       background: var(--gold2);
-      border: 1px solid #F5C26B
+      border: 1.5px solid #F5C26B
     }
 
     .notice-blue {
-      background: var(--navy3);
-      border: 1px solid #B5D4F4
+      background: var(--primary3);
+      border: 1.5px solid #B5D4F4
+    }
+
+    .notice-coral {
+      background: var(--coral2);
+      border: 1.5px solid #F5A5A0
     }
 
     .notice-text {
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.5
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.55
     }
 
     .notice-amber .notice-text {
@@ -706,18 +795,22 @@
       color: #0C447C
     }
 
-    /* DANGER */
+    .notice-coral .notice-text {
+      color: #8B1A12
+    }
+
+    /* ── DANGER ── */
     .danger-card {
       background: var(--red2);
       border: 2px solid #FCA5A5;
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: var(--radius-xl);
+      padding: 22px;
       margin-bottom: 20px
     }
 
     .danger-title {
       font-size: 17px;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--red);
       margin-bottom: 8px;
       display: flex;
@@ -732,22 +825,17 @@
       margin-bottom: 16px
     }
 
-    .btn-red {
-      background: linear-gradient(135deg, #B91C1C, var(--red));
-      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3)
-    }
-
-    /* EMPTY */
+    /* ── EMPTY STATE ── */
     .empty {
       text-align: center;
-      padding: 32px 20px
+      padding: 28px 20px
     }
 
     .empty-icon {
       width: 72px;
       height: 72px;
       border-radius: 20px;
-      background: var(--navy3);
+      background: var(--primary3);
       margin: 0 auto 16px;
       display: flex;
       align-items: center;
@@ -756,51 +844,139 @@
 
     .empty-title {
       font-size: 18px;
-      font-weight: 700;
-      color: var(--navy)
+      font-weight: 800;
+      color: var(--primary)
     }
 
     .empty-sub {
       font-size: 14px;
       color: var(--slate);
       margin-top: 6px;
-      line-height: 1.6
+      line-height: 1.6;
+      font-weight: 500
     }
 
-    /* QUARTER FILTER */
+    /* ── INVOICE CARDS ── */
+    .inv-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      margin-bottom: 12px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: var(--card-shadow);
+    }
+
+    .inv-card-pending {
+      border-left: 5px solid var(--coral)
+    }
+
+    .inv-card-paid {
+      border-left: 5px solid var(--green)
+    }
+
+    .inv-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px
+    }
+
+    .inv-number {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--primary)
+    }
+
+    .inv-date {
+      font-size: 12px;
+      color: var(--slate);
+      font-weight: 600;
+      margin-top: 3px
+    }
+
+    .inv-amount-label {
+      font-size: 11px;
+      color: var(--slate);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px
+    }
+
+    .inv-amount {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      margin-top: 3px
+    }
+
+    .inv-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end
+    }
+
+    .inv-desc {
+      font-size: 13px;
+      color: var(--slate);
+      font-weight: 600;
+      margin-top: 8px
+    }
+
+    .inv-dl-btn {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 12px;
+      background: var(--primary3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+
+    .inv-dl-btn:active {
+      transform: scale(0.93)
+    }
+
+    /* ── QUARTER FILTER ── */
     .q-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 16px
+      gap: 10px;
+      margin-bottom: 18px
     }
 
     .q-btn {
-      padding: 16px 10px;
-      border-radius: 16px;
+      padding: 18px 10px;
+      border-radius: var(--radius-lg);
       border: 2px solid var(--slate3);
       background: var(--white);
       cursor: pointer;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       text-align: center;
-      transition: all 0.15s
+      transition: all 0.15s;
+      box-shadow: var(--card-shadow)
     }
 
     .q-btn.sel {
-      background: var(--navy);
-      border-color: var(--navy)
+      background: var(--primary);
+      border-color: var(--primary)
     }
 
     .q-label {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--navy)
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary)
     }
 
     .q-sub {
       font-size: 12px;
       color: var(--slate);
-      margin-top: 2px
+      margin-top: 3px;
+      font-weight: 600
     }
 
     .q-btn.sel .q-label,
@@ -808,16 +984,85 @@
       color: #fff
     }
 
-    /* NAV */
+    /* ── FILTER PILLS ── */
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none
+    }
+
+    .filter-pill {
+      flex-shrink: 0;
+      padding: 10px 18px;
+      border-radius: 25px;
+      border: 2px solid var(--slate3);
+      background: var(--white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate);
+      cursor: pointer;
+      transition: all 0.15s
+    }
+
+    .filter-pill.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff
+    }
+
+    /* ── SUMMARY TOTAL BANNER ── */
+    .sum-banner {
+      background: linear-gradient(135deg, var(--teal)10%, #0B8A78 100%);
+      border-radius: var(--radius-xl);
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sum-banner-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.8)
+    }
+
+    .sum-banner-val {
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px
+    }
+
+    .sum-banner-note {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-top: 3px;
+      font-weight: 500
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--slate2);
+      margin: 6px 0 18px
+    }
+
+    /* ── NAV BAR ── */
     .nav {
       background: var(--white);
-      border-top: 1px solid var(--slate3);
+      border-top: 1.5px solid var(--slate3);
       display: flex;
       align-items: center;
-      padding: 10px 8px 14px;
+      padding: 10px 6px 16px;
       position: sticky;
       bottom: 0;
       z-index: 20;
+      box-shadow: 0 -4px 20px rgba(27, 43, 107, 0.08);
     }
 
     .nav-btn {
@@ -825,64 +1070,53 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       border: none;
       background: none;
       cursor: pointer;
-      padding: 6px 2px;
-      border-radius: 12px;
+      padding: 8px 4px;
+      border-radius: 14px;
       transition: background 0.15s
     }
 
     .nav-btn.active {
-      background: var(--navy3)
+      background: var(--primary3)
     }
 
     .nav-lbl {
-      font-family: 'Poppins', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
       color: var(--slate)
     }
 
     .nav-btn.active .nav-lbl {
-      color: var(--navy)
+      color: var(--primary)
     }
 
-    /* DIVIDER */
-    .divider {
-      height: 1px;
-      background: var(--slate2);
-      margin: 4px 0 16px
-    }
-
-    /* STATUS ROW */
-    .stat-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-      overflow-x: auto;
-      padding-bottom: 2px;
-      scrollbar-width: none
-    }
-
-    .stat-pill {
-      flex-shrink: 0;
-      padding: 8px 16px;
-      border-radius: 20px;
-      border: 1.5px solid var(--slate3);
+    /* ── SECTION CARD (compact) ── */
+    .sec-card {
       background: var(--white);
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--slate);
-      cursor: pointer;
-      transition: all 0.15s
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      margin-bottom: 14px;
+      border: 1.5px solid var(--slate3);
+      box-shadow: var(--card-shadow)
     }
 
-    .stat-pill.active {
-      background: var(--navy);
-      border-color: var(--navy);
+    /* ── PAGE LABEL ── */
+    .page-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 3px
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 900;
       color: #fff
     }
   </style>
@@ -894,51 +1128,53 @@
     <!-- ═══ HOME ═══ -->
     <div class="screen active" id="s-home">
       <div class="topbar">
-        <div class="topbar-row" style="margin-bottom: 18px;">
-          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+        <div class="topbar-row">
+          <img src="logo_dark.svg" height="28" alt="Sensible Care">
           <div class="topbar-avatar">BR</div>
         </div>
         <div>
-          <div class="topbar-greeting">Welcome back</div>
+          <div class="topbar-greeting">Good morning</div>
           <div class="topbar-name">Barry Reaper</div>
         </div>
       </div>
       <div class="scroll">
 
-        <div class="card card-hero">
-          <div class="hero-label">Total Budget</div>
+        <div class="card-hero">
+          <div class="hero-eyebrow">Total Care Budget</div>
           <div class="hero-value">$6,334</div>
-          <div class="hero-sub">2 active care pathways</div>
-          <div class="hero-badges">
-            <div class="hero-badge"><i data-lucide="shield-check" style="width:13px;height:13px"></i> Current</div>
-            <div class="hero-badge"><i data-lucide="users" style="width:13px;height:13px"></i> 1 Care Contact</div>
+          <div class="hero-sub">2 active care pathways · 2026</div>
+          <div class="hero-chips">
+            <div class="hero-chip"><i data-lucide="shield-check" style="width:13px;height:13px"></i> Active</div>
+            <div class="hero-chip"><i data-lucide="users" style="width:13px;height:13px"></i> 1 Care Contact</div>
+            <div class="hero-chip hero-chip-coral"><i data-lucide="alert-circle" style="width:13px;height:13px"></i> 1
+              Pending Invoice</div>
           </div>
         </div>
 
         <div class="grid2">
           <div class="stat-card">
             <div class="stat-icon-wrap" style="background:var(--green2)"><i data-lucide="trending-up"
-                style="width:20px;height:20px;color:var(--green)"></i></div>
+                style="width:22px;height:22px;color:var(--green)"></i></div>
             <div class="stat-label">Available</div>
             <div class="stat-value green">$2,571</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon-wrap" style="background:var(--navy3)"><i data-lucide="clock"
-                style="width:20px;height:20px;color:var(--navy)"></i></div>
+            <div class="stat-icon-wrap" style="background:var(--primary3)"><i data-lucide="clock"
+                style="width:22px;height:22px;color:var(--primary)"></i></div>
             <div class="stat-label">Committed</div>
             <div class="stat-value">$936</div>
           </div>
         </div>
 
-        <div class="sec-title"><i data-lucide="bar-chart-2" style="width:16px;height:16px"></i> Budget Pathways</div>
+        <div class="sec-title"><i data-lucide="bar-chart-2" style="width:18px;height:18px"></i> Budget Pathways</div>
 
-        <div class="card">
-          <div class="budget-head">
+        <div class="bcard">
+          <div class="bcard-header">
             <div>
-              <div class="budget-name">Ongoing Quarterly</div>
-              <div class="budget-total">Budget: $4,334.97</div>
+              <div class="bcard-title">Ongoing Quarterly</div>
+              <div class="bcard-sub">Budget: $4,334.97</div>
             </div>
-            <span class="badge badge-green"><i data-lucide="check-circle" style="width:10px;height:10px"></i> 22%
+            <span class="badge badge-green"><i data-lucide="check-circle" style="width:11px;height:11px"></i> 22%
               used</span>
           </div>
           <div class="prog-track">
@@ -950,13 +1186,13 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="budget-head">
+        <div class="bcard">
+          <div class="bcard-header">
             <div>
-              <div class="budget-name">Assistive Technology</div>
-              <div class="budget-total">Budget: $2,000.00</div>
+              <div class="bcard-title">Assistive Technology</div>
+              <div class="bcard-sub">Budget: $2,000.00</div>
             </div>
-            <span class="badge badge-navy"><i data-lucide="circle" style="width:10px;height:10px"></i> Not
+            <span class="badge badge-navy"><i data-lucide="circle" style="width:11px;height:11px"></i> Not
               started</span>
           </div>
           <div class="prog-track">
@@ -968,9 +1204,9 @@
           </div>
         </div>
 
-        <div class="sec-title"><i data-lucide="zap" style="width:16px;height:16px"></i> Quick Actions</div>
+        <div class="sec-title"><i data-lucide="zap" style="width:18px;height:18px"></i> Quick Actions</div>
 
-        <button class="action-btn btn-navy" onclick="show('care')">
+        <button class="action-btn btn-primary" onclick="show('care')">
           <div class="btn-icon-wrap"><i data-lucide="phone-call" style="width:22px;height:22px;color:#fff"></i></div>
           <div class="btn-text">
             <span class="btn-main">Call My Care Manager</span>
@@ -979,21 +1215,21 @@
           <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
         </button>
 
-        <button class="action-btn btn-teal" onclick="show('invoice')">
+        <button class="action-btn btn-coral" onclick="show('invoice')">
           <div class="btn-icon-wrap"><i data-lucide="receipt" style="width:22px;height:22px;color:#fff"></i></div>
           <div class="btn-text">
             <span class="btn-main">View My Invoices</span>
-            <span class="btn-hint">1 pending invoice</span>
+            <span class="btn-hint">1 pending · $145.00 due</span>
           </div>
           <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
         </button>
 
         <button class="action-btn btn-outline" onclick="show('account')">
-          <div class="btn-icon-wrap"><i data-lucide="pie-chart" style="width:22px;height:22px;color:var(--navy)"></i>
+          <div class="btn-icon-wrap"><i data-lucide="pie-chart" style="width:22px;height:22px;color:var(--primary)"></i>
           </div>
           <div class="btn-text">
             <span class="btn-main">Full Budget Summary</span>
-            <span class="btn-hint">Expenses & pathway details</span>
+            <span class="btn-hint">Expenses &amp; pathway details</span>
           </div>
           <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
         </button>
@@ -1005,42 +1241,54 @@
     <!-- ═══ INVOICES ═══ -->
     <div class="screen" id="s-invoice">
       <div class="topbar">
-        <div class="topbar-row" style="margin-bottom: 18px;">
-          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+        <div class="topbar-row">
+          <img src="logo_dark.svg" height="28" alt="Sensible Care">
           <div class="topbar-avatar">BR</div>
         </div>
         <div>
-          <div class="topbar-greeting">Billing records</div>
-          <div class="topbar-name">My Invoices</div>
+          <div class="page-label">Billing Records</div>
+          <div class="page-title">My Invoices</div>
         </div>
       </div>
       <div class="scroll">
 
+        <!-- Outstanding alert -->
+        <div class="notice notice-coral" style="border-radius:var(--radius-xl);margin-bottom:14px">
+          <i data-lucide="alert-circle"
+            style="width:22px;height:22px;color:var(--coral);flex-shrink:0;margin-top:1px"></i>
+          <div>
+            <div class="notice-text">You have 1 unpaid invoice</div>
+            <div style="font-size:12px;color:var(--coral);font-weight:700;margin-top:3px">$145.00 due · INV-2026-042
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary totals -->
         <div class="grid2">
           <div class="stat-card">
-            <div class="stat-icon-wrap" style="background:#FEF9EC"><i data-lucide="alert-circle"
-                style="width:20px;height:20px;color:var(--gold)"></i></div>
+            <div class="stat-icon-wrap" style="background:var(--coral2)"><i data-lucide="alert-circle"
+                style="width:22px;height:22px;color:var(--coral)"></i></div>
             <div class="stat-label">Outstanding</div>
-            <div class="stat-value gold">$145.00</div>
+            <div class="stat-value coral">$145.00</div>
           </div>
           <div class="stat-card">
             <div class="stat-icon-wrap" style="background:var(--green2)"><i data-lucide="check-circle-2"
-                style="width:20px;height:20px;color:var(--green)"></i></div>
-            <div class="stat-label">Paid</div>
+                style="width:22px;height:22px;color:var(--green)"></i></div>
+            <div class="stat-label">Paid YTD</div>
             <div class="stat-value green">$520.50</div>
           </div>
         </div>
 
-        <button class="action-btn btn-navy" style="margin-bottom:18px">
+        <button class="action-btn btn-primary" style="margin-bottom:18px">
           <div class="btn-icon-wrap"><i data-lucide="download" style="width:22px;height:22px;color:#fff"></i></div>
           <div class="btn-text">
             <span class="btn-main">Download Statement</span>
-            <span class="btn-hint">Export as PDF to your phone</span>
+            <span class="btn-hint">Export full history as PDF</span>
           </div>
           <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
         </button>
 
-        <div class="sec-title"><i data-lucide="calendar" style="width:16px;height:16px"></i> Filter by Quarter — 2026
+        <div class="sec-title"><i data-lucide="calendar" style="width:18px;height:18px"></i> Filter by Quarter — 2026
         </div>
 
         <div class="q-grid">
@@ -1062,72 +1310,72 @@
           </div>
         </div>
 
-        <div class="stat-row">
-          <div class="stat-pill active">All Invoices</div>
-          <div class="stat-pill" onclick="selPill(this)">Pending</div>
-          <div class="stat-pill" onclick="selPill(this)">Approved</div>
-          <div class="stat-pill" onclick="selPill(this)">Paid</div>
+        <div class="filter-row">
+          <div class="filter-pill active">All Invoices</div>
+          <div class="filter-pill" onclick="selPill(this)">Pending</div>
+          <div class="filter-pill" onclick="selPill(this)">Approved</div>
+          <div class="filter-pill" onclick="selPill(this)">Paid</div>
         </div>
 
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <!-- INVOICE 1 - Pending -->
+        <div class="inv-card inv-card-pending">
+          <div class="inv-top">
             <div>
-              <div style="font-size:15px; font-weight:700; color:var(--navy);">INV-2026-042</div>
-              <div style="font-size:12px; color:var(--slate);">10 May 2026</div>
+              <div class="inv-number">INV-2026-042</div>
+              <div class="inv-date">Issued: 10 May 2026</div>
             </div>
-            <span class="badge badge-amber"><i data-lucide="clock" style="width:10px;height:10px"></i> Pending</span>
+            <span class="badge badge-amber"><i data-lucide="clock" style="width:11px;height:11px"></i> Pending</span>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+          <div class="inv-desc">Personal Care Services — May 2026</div>
+          <div class="inv-bottom" style="margin-top:14px">
             <div>
-              <div style="font-size:11px; color:var(--slate); font-weight:500;">Amount Due</div>
-              <div style="font-size:18px; font-weight:800; color:var(--navy);">$145.00</div>
+              <div class="inv-amount-label">Amount Due</div>
+              <div class="inv-amount">$145.00</div>
             </div>
-            <button
-              style="border:none;background:var(--navy3);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;">
-              <i data-lucide="download" style="width:18px;height:18px;color:var(--navy)"></i>
-            </button>
+            <button class="inv-dl-btn"><i data-lucide="download"
+                style="width:20px;height:20px;color:var(--primary)"></i></button>
           </div>
         </div>
 
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <!-- INVOICE 2 - Paid -->
+        <div class="inv-card inv-card-paid">
+          <div class="inv-top">
             <div>
-              <div style="font-size:15px; font-weight:700; color:var(--navy);">INV-2026-038</div>
-              <div style="font-size:12px; color:var(--slate);">28 Apr 2026</div>
+              <div class="inv-number">INV-2026-038</div>
+              <div class="inv-date">Issued: 28 Apr 2026</div>
             </div>
-            <span class="badge badge-green"><i data-lucide="check-circle" style="width:10px;height:10px"></i>
+            <span class="badge badge-green"><i data-lucide="check-circle" style="width:11px;height:11px"></i>
               Paid</span>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+          <div class="inv-desc">Community Nursing — April 2026</div>
+          <div class="inv-bottom" style="margin-top:14px">
             <div>
-              <div style="font-size:11px; color:var(--slate); font-weight:500;">Amount</div>
-              <div style="font-size:18px; font-weight:800; color:var(--navy);">$320.50</div>
+              <div class="inv-amount-label">Amount Paid</div>
+              <div class="inv-amount">$320.50</div>
             </div>
-            <button
-              style="border:none;background:var(--navy3);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;">
-              <i data-lucide="download" style="width:18px;height:18px;color:var(--navy)"></i>
-            </button>
+            <button class="inv-dl-btn"><i data-lucide="download"
+                style="width:20px;height:20px;color:var(--primary)"></i></button>
           </div>
         </div>
 
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <!-- INVOICE 3 - Paid -->
+        <div class="inv-card inv-card-paid">
+          <div class="inv-top">
             <div>
-              <div style="font-size:15px; font-weight:700; color:var(--navy);">INV-2026-035</div>
-              <div style="font-size:12px; color:var(--slate);">14 Apr 2026</div>
+              <div class="inv-number">INV-2026-035</div>
+              <div class="inv-date">Issued: 14 Apr 2026</div>
             </div>
-            <span class="badge badge-green"><i data-lucide="check-circle" style="width:10px;height:10px"></i>
+            <span class="badge badge-green"><i data-lucide="check-circle" style="width:11px;height:11px"></i>
               Paid</span>
           </div>
-          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+          <div class="inv-desc">Domestic Assistance — April 2026</div>
+          <div class="inv-bottom" style="margin-top:14px">
             <div>
-              <div style="font-size:11px; color:var(--slate); font-weight:500;">Amount</div>
-              <div style="font-size:18px; font-weight:800; color:var(--navy);">$200.00</div>
+              <div class="inv-amount-label">Amount Paid</div>
+              <div class="inv-amount">$200.00</div>
             </div>
-            <button
-              style="border:none;background:var(--navy3);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;">
-              <i data-lucide="download" style="width:18px;height:18px;color:var(--navy)"></i>
-            </button>
+            <button class="inv-dl-btn"><i data-lucide="download"
+                style="width:20px;height:20px;color:var(--primary)"></i></button>
           </div>
         </div>
 
@@ -1135,55 +1383,65 @@
       <div class="nav" id="nav-invoice"></div>
     </div>
 
-    <!-- ═══ ACCOUNT SUMMARY ═══ -->
+    <!-- ═══ BUDGET SUMMARY ═══ -->
     <div class="screen" id="s-account">
       <div class="topbar">
-        <div class="topbar-row" style="margin-bottom: 18px;">
-          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+        <div class="topbar-row">
+          <img src="logo_dark.svg" height="28" alt="Sensible Care">
           <div class="topbar-avatar">BR</div>
         </div>
         <div>
-          <div class="topbar-greeting">Financial overview</div>
-          <div class="topbar-name">Budget Summary</div>
+          <div class="page-label">Financial Overview</div>
+          <div class="page-title">Budget Summary</div>
         </div>
       </div>
       <div class="scroll">
 
-
-        <div class="card card-hero">
-          <div class="hero-label">Total Budget</div>
+        <div class="card-hero">
+          <div class="hero-eyebrow">Total Budget</div>
           <div class="hero-value">$6,334.97</div>
-          <div class="hero-sub">Barry Reaper · Saint Helena, 3088</div>
-          <div class="hero-badges" style="margin-top:12px">
-            <div class="hero-badge"><i data-lucide="wallet" style="width:12px;height:12px"></i> 2 pathways</div>
-            <div class="hero-badge"><i data-lucide="activity" style="width:12px;height:12px"></i> Active</div>
+          <div class="hero-sub">Barry Reaper · Saint Helena VIC 3088</div>
+          <div class="hero-chips">
+            <div class="hero-chip"><i data-lucide="wallet" style="width:13px;height:13px"></i> 2 Pathways</div>
+            <div class="hero-chip"><i data-lucide="activity" style="width:13px;height:13px"></i> Active</div>
           </div>
         </div>
 
         <div class="grid2">
           <div class="stat-card">
             <div class="stat-icon-wrap" style="background:var(--green2)"><i data-lucide="trending-up"
-                style="width:20px;height:20px;color:var(--green)"></i></div>
+                style="width:22px;height:22px;color:var(--green)"></i></div>
             <div class="stat-label">Remaining</div>
             <div class="stat-value green">$2,571</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon-wrap" style="background:var(--navy3)"><i data-lucide="file-text"
-                style="width:20px;height:20px;color:var(--navy)"></i></div>
+            <div class="stat-icon-wrap" style="background:var(--primary3)"><i data-lucide="file-text"
+                style="width:22px;height:22px;color:var(--primary)"></i></div>
             <div class="stat-label">Claimed</div>
             <div class="stat-value">$217.00</div>
           </div>
         </div>
 
-        <div class="sec-title"><i data-lucide="layers" style="width:16px;height:16px"></i> Budget Pathways</div>
+        <!-- Spending summary banner -->
+        <div class="sum-banner">
+          <div>
+            <div class="sum-banner-label">Total Spent This Year</div>
+            <div class="sum-banner-val">$3,763.97</div>
+            <div class="sum-banner-note">Across all care pathways</div>
+          </div>
+          <i data-lucide="trending-up" style="width:40px;height:40px;color:rgba(255,255,255,0.35)"></i>
+        </div>
 
-        <div class="card">
-          <div class="budget-head">
+        <div class="sec-title"><i data-lucide="layers" style="width:18px;height:18px"></i> Budget Pathways</div>
+
+        <!-- Pathway 1 -->
+        <div class="bcard">
+          <div class="bcard-header">
             <div>
-              <div class="budget-name">Ongoing Quarterly</div>
-              <div class="budget-total">Total: $4,334.97</div>
+              <div class="bcard-title">Ongoing Quarterly</div>
+              <div class="bcard-sub">Total Budget: $4,334.97</div>
             </div>
-            <span class="badge badge-green"><i data-lucide="check-circle" style="width:10px;height:10px"></i> 22%
+            <span class="badge badge-green"><i data-lucide="check-circle" style="width:11px;height:11px"></i> 22%
               used</span>
           </div>
           <div class="prog-track">
@@ -1193,24 +1451,24 @@
             <span class="prog-left">$571.77 remaining</span>
             <span class="prog-right">$936 committed</span>
           </div>
-          <div class="divider"></div>
-          <div class="grid2" style="margin:0">
-            <div style="text-align:center;padding:12px;background:var(--bg);border-radius:12px">
-              <div style="font-size:14px;color:var(--slate);font-weight:600">Claimed</div>
-              <div style="font-size:24px;font-weight:800;color:var(--navy);margin-top:2px">$217.00</div>
+          <div class="bdetail-grid">
+            <div class="bdetail-cell">
+              <div class="bdetail-label">Claimed</div>
+              <div class="bdetail-val">$217.00</div>
             </div>
-            <div style="text-align:center;padding:12px;background:var(--bg);border-radius:12px">
-              <div style="font-size:14px;color:var(--slate);font-weight:600">Committed</div>
-              <div style="font-size:24px;font-weight:800;color:var(--gold);margin-top:2px">$936</div>
+            <div class="bdetail-cell">
+              <div class="bdetail-label">Committed</div>
+              <div class="bdetail-val gold">$936.00</div>
             </div>
           </div>
         </div>
 
-        <div class="card">
-          <div class="budget-head">
+        <!-- Pathway 2 -->
+        <div class="bcard">
+          <div class="bcard-header">
             <div>
-              <div class="budget-name">Assistive Technology</div>
-              <div class="budget-total">Total: $2,000.00</div>
+              <div class="bcard-title">Assistive Technology</div>
+              <div class="bcard-sub">Total Budget: $2,000.00</div>
             </div>
             <span class="badge badge-navy">Not started</span>
           </div>
@@ -1223,6 +1481,11 @@
           </div>
         </div>
 
+        <div class="notice notice-blue">
+          <i data-lucide="info" style="width:20px;height:20px;color:var(--primary2);flex-shrink:0;margin-top:1px"></i>
+          <span class="notice-text">Budget resets quarterly. Contact your Care Manager for a full breakdown of
+            expenses.</span>
+        </div>
 
       </div>
       <div class="nav" id="nav-account"></div>
@@ -1231,27 +1494,27 @@
     <!-- ═══ CARE MANAGER ═══ -->
     <div class="screen" id="s-care">
       <div class="topbar">
-        <div class="topbar-row" style="margin-bottom: 18px;">
-          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+        <div class="topbar-row">
+          <img src="logo_dark.svg" height="28" alt="Sensible Care">
           <div class="topbar-avatar">BR</div>
         </div>
         <div>
-          <div class="topbar-greeting">Your support team</div>
-          <div class="topbar-name">Care Manager</div>
+          <div class="page-label">Your Support Team</div>
+          <div class="page-title">Care Manager</div>
         </div>
       </div>
       <div class="scroll">
 
-        <div class="card care-hero-card">
+        <div class="card care-hero-card" style="border-radius:var(--radius-xl);margin-bottom:14px">
           <div class="care-avatar">SA</div>
           <div class="care-name">Stephany Azcarate</div>
           <div class="care-role">Primary Care Manager</div>
           <div class="active-pill">
-            <div class="active-dot"></div> Active
+            <div class="active-dot"></div> Active now
           </div>
         </div>
 
-        <button class="action-btn btn-teal" style="margin-top:14px">
+        <button class="action-btn btn-teal" style="margin-top:4px">
           <div class="btn-icon-wrap"><i data-lucide="phone-call" style="width:22px;height:22px;color:#fff"></i></div>
           <div class="btn-text">
             <span class="btn-main">Call Care Team</span>
@@ -1261,7 +1524,8 @@
         </button>
 
         <button class="action-btn btn-outline">
-          <div class="btn-icon-wrap"><i data-lucide="mail" style="width:22px;height:22px;color:var(--navy)"></i></div>
+          <div class="btn-icon-wrap"><i data-lucide="mail" style="width:22px;height:22px;color:var(--primary)"></i>
+          </div>
           <div class="btn-text">
             <span class="btn-main">Send an Email</span>
             <span class="btn-hint">support@sensiblecare.com.au</span>
@@ -1269,22 +1533,22 @@
           <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
         </button>
 
-        <div class="card" style="margin-top:4px">
-          <div class="sec-title" style="margin:0 0 10px"><i data-lucide="info" style="width:16px;height:16px"></i>
+        <div class="sec-card">
+          <div class="sec-title" style="margin:0 0 12px"><i data-lucide="info" style="width:18px;height:18px"></i>
             Contact Details</div>
           <div class="info-row">
             <div class="info-icon-wrap" style="background:var(--teal2)"><i data-lucide="clock"
                 style="width:20px;height:20px;color:var(--teal)"></i></div>
             <div>
-              <div class="info-label">Available hours</div>
+              <div class="info-label">Available Hours</div>
               <div class="info-val">Mon – Fri, 9 AM – 5 PM</div>
             </div>
           </div>
           <div class="info-row">
-            <div class="info-icon-wrap" style="background:var(--navy3)"><i data-lucide="phone"
-                style="width:20px;height:20px;color:var(--navy)"></i></div>
+            <div class="info-icon-wrap" style="background:var(--primary3)"><i data-lucide="phone"
+                style="width:20px;height:20px;color:var(--primary)"></i></div>
             <div>
-              <div class="info-label">Phone number</div>
+              <div class="info-label">Phone Number</div>
               <div class="info-val">1300 312 772</div>
             </div>
           </div>
@@ -1292,7 +1556,7 @@
             <div class="info-icon-wrap" style="background:var(--green2)"><i data-lucide="mail"
                 style="width:20px;height:20px;color:var(--green)"></i></div>
             <div>
-              <div class="info-label">Email address</div>
+              <div class="info-label">Email Address</div>
               <div class="info-val" style="font-size:13px">support@sensiblecare.com.au</div>
             </div>
           </div>
@@ -1301,13 +1565,14 @@
                 style="width:20px;height:20px;color:var(--gold)"></i></div>
             <div>
               <div class="info-label">Location</div>
-              <div class="info-val">Saint Helena, 3088</div>
+              <div class="info-val">Saint Helena VIC 3088</div>
             </div>
           </div>
         </div>
 
         <div class="notice notice-blue">
-          <i data-lucide="lightbulb" style="width:18px;height:18px;color:var(--navy2);flex-shrink:0;margin-top:1px"></i>
+          <i data-lucide="lightbulb"
+            style="width:20px;height:20px;color:var(--primary2);flex-shrink:0;margin-top:1px"></i>
           <span class="notice-text">Outside hours? Leave a voicemail — Stephany will call you back next business
             day.</span>
         </div>
@@ -1319,33 +1584,33 @@
     <!-- ═══ SETTINGS ═══ -->
     <div class="screen" id="s-settings">
       <div class="topbar">
-        <div class="topbar-row" style="margin-bottom: 18px;">
-          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+        <div class="topbar-row">
+          <img src="logo_dark.svg" height="28" alt="Sensible Care">
           <div class="topbar-avatar">BR</div>
         </div>
         <div>
-          <div class="topbar-greeting">Your preferences</div>
-          <div class="topbar-name">Settings</div>
+          <div class="page-label">Your Preferences</div>
+          <div class="page-title">Settings</div>
         </div>
       </div>
       <div class="scroll">
 
-        <div class="card">
-          <div class="sec-title" style="margin:0 0 14px"><i data-lucide="user-circle"
-              style="width:16px;height:16px"></i> Profile & Contact</div>
-          <div class="field-label">Preferred name</div>
+        <div class="sec-card">
+          <div class="sec-title" style="margin:0 0 16px"><i data-lucide="user-circle"
+              style="width:18px;height:18px"></i> Profile &amp; Contact</div>
+          <div class="field-label">Preferred Name</div>
           <input class="big-input" type="text" placeholder="Barry">
-          <div class="field-label">Email address</div>
+          <div class="field-label">Email Address</div>
           <input class="big-input" type="email" placeholder="reaperf@gmail.com">
-          <div class="field-label">Mobile number</div>
+          <div class="field-label">Mobile Number</div>
           <input class="big-input" type="tel" placeholder="0409 330 071">
 
-          <div class="sec-title" style="margin:4px 0 12px"><i data-lucide="message-circle"
-              style="width:16px;height:16px"></i> Contact preference</div>
+          <div class="sec-title" style="margin:4px 0 14px"><i data-lucide="message-circle"
+              style="width:18px;height:18px"></i> Contact Preference</div>
           <div class="choice-grid">
             <div class="choice-btn sel" onclick="selC(this,'cp')">
-              <div class="choice-icon-wrap"><i data-lucide="mail" style="width:18px;height:18px;color:var(--navy)"></i>
-              </div>
+              <div class="choice-icon-wrap"><i data-lucide="mail"
+                  style="width:18px;height:18px;color:var(--primary)"></i></div>
               Email
             </div>
             <div class="choice-btn" onclick="selC(this,'cp')">
@@ -1367,8 +1632,8 @@
 
           <div class="tog-row">
             <div>
-              <div class="tog-label">Email notifications</div>
-              <div class="tog-sub">Statements & portal updates</div>
+              <div class="tog-label">Email Notifications</div>
+              <div class="tog-sub">Statements &amp; portal updates</div>
             </div>
             <button class="tog" id="t1" onclick="togFn('t1')" style="background:var(--teal)">
               <div class="tog-knob" style="left:30px"></div>
@@ -1376,7 +1641,7 @@
           </div>
           <div class="tog-row">
             <div>
-              <div class="tog-label">SMS alerts</div>
+              <div class="tog-label">SMS Alerts</div>
               <div class="tog-sub">Important updates by text</div>
             </div>
             <button class="tog" id="t2" onclick="togFn('t2')" style="background:var(--slate3)">
@@ -1384,43 +1649,44 @@
             </button>
           </div>
 
-          <button class="action-btn btn-green" style="margin-top:16px;margin-bottom:0">
+          <button class="action-btn btn-green" style="margin-top:18px;margin-bottom:0">
             <div class="btn-icon-wrap"><i data-lucide="save" style="width:22px;height:22px;color:#fff"></i></div>
             <div class="btn-text"><span class="btn-main">Save Changes</span></div>
           </button>
         </div>
 
-        <div class="card">
-          <div class="sec-title" style="margin:0 0 14px"><i data-lucide="lock" style="width:16px;height:16px"></i>
+        <div class="sec-card">
+          <div class="sec-title" style="margin:0 0 16px"><i data-lucide="lock" style="width:18px;height:18px"></i>
             Change Password</div>
-          <div class="field-label">Current password</div>
+          <div class="field-label">Current Password</div>
           <input class="big-input" type="password" placeholder="••••••••">
-          <div class="field-label">New password</div>
+          <div class="field-label">New Password</div>
           <input class="big-input" type="password" placeholder="••••••••">
-          <div class="field-label">Confirm new password</div>
+          <div class="field-label">Confirm New Password</div>
           <input class="big-input" type="password" placeholder="••••••••">
-          <div class="notice notice-blue" style="margin:0 0 12px">
-            <i data-lucide="shield" style="width:16px;height:16px;color:var(--navy2);flex-shrink:0"></i>
+          <div class="notice notice-blue" style="margin:0 0 14px">
+            <i data-lucide="shield" style="width:18px;height:18px;color:var(--primary2);flex-shrink:0"></i>
             <span class="notice-text">Use 8+ characters with a capital letter, number, and symbol.</span>
           </div>
           <button class="action-btn btn-outline" style="margin:0">
-            <div class="btn-icon-wrap"><i data-lucide="key" style="width:22px;height:22px;color:var(--navy)"></i></div>
+            <div class="btn-icon-wrap"><i data-lucide="key" style="width:22px;height:22px;color:var(--primary)"></i>
+            </div>
             <div class="btn-text"><span class="btn-main">Update Password</span></div>
           </button>
         </div>
 
-        <div class="card">
-          <div class="sec-title" style="margin:0 0 10px"><i data-lucide="users" style="width:16px;height:16px"></i>
-            Family & Representatives</div>
-          <div class="empty" style="padding:16px 0 8px">
-            <div class="empty-icon" style="width:56px;height:56px"><i data-lucide="user-plus"
-                style="width:24px;height:24px;color:var(--navy)"></i></div>
-            <div class="empty-title" style="font-size:15px">No members added</div>
-            <div class="empty-sub" style="font-size:13px">Invite family or carers to help manage your account.</div>
+        <div class="sec-card">
+          <div class="sec-title" style="margin:0 0 12px"><i data-lucide="users" style="width:18px;height:18px"></i>
+            Family &amp; Representatives</div>
+          <div class="empty" style="padding:14px 0 10px">
+            <div class="empty-icon" style="width:58px;height:58px"><i data-lucide="user-plus"
+                style="width:26px;height:26px;color:var(--primary)"></i></div>
+            <div class="empty-title" style="font-size:16px">No members added</div>
+            <div class="empty-sub" style="font-size:14px">Invite family or carers to help manage your account.</div>
           </div>
           <button class="action-btn btn-outline" style="margin:8px 0 0">
-            <div class="btn-icon-wrap"><i data-lucide="user-plus" style="width:22px;height:22px;color:var(--navy)"></i>
-            </div>
+            <div class="btn-icon-wrap"><i data-lucide="user-plus"
+                style="width:22px;height:22px;color:var(--primary)"></i></div>
             <div class="btn-text"><span class="btn-main">Invite a Family Member</span><span class="btn-hint"
                 style="color:var(--slate)">They'll receive an email invite</span></div>
           </button>
@@ -1446,35 +1712,23 @@
   <script>
     const NAV = [{ id: 'home', icon: 'home', lbl: 'Home' }, { id: 'invoice', icon: 'receipt', lbl: 'Invoices' }, { id: 'account', icon: 'pie-chart', lbl: 'Budget' }, { id: 'care', icon: 'heart-handshake', lbl: 'Care' }, { id: 'settings', icon: 'settings', lbl: 'Settings' }];
     const screens = ['home', 'invoice', 'account', 'care', 'settings'];
-
     screens.forEach(sid => {
       const el = document.getElementById('nav-' + sid);
-      el.innerHTML = NAV.map(n => `<button class="nav-btn${n.id === sid ? ' active' : ''}" id="nb-${sid}-${n.id}" onclick="show('${n.id}')"><i data-lucide="${n.icon}" style="width:22px;height:22px;color:${n.id === sid ? 'var(--navy)' : 'var(--slate)'}"></i><span class="nav-lbl">${n.lbl}</span></button>`).join('');
+      el.innerHTML = NAV.map(n => `<button class="nav-btn${n.id === sid ? ' active' : ''}" id="nb-${sid}-${n.id}" onclick="show('${n.id}')"><i data-lucide="${n.icon}" style="width:24px;height:24px;color:${n.id === sid ? 'var(--primary)' : 'var(--slate)'}"></i><span class="nav-lbl">${n.lbl}</span></button>`).join('');
     });
-
-    function show(tab) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('s-' + tab).classList.add('active');
-      lucide.createIcons();
-    }
+    function show(tab) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('s-' + tab).classList.add('active'); lucide.createIcons() }
     function selQ(el) { document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('sel')); el.classList.add('sel') }
-    function selPill(el) { el.closest('.stat-row').querySelectorAll('.stat-pill').forEach(p => p.classList.remove('active')); el.classList.add('active') }
+    function selPill(el) { el.closest('.filter-row').querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active')); el.classList.add('active') }
     function selC(el, g) { el.closest('.choice-grid').querySelectorAll('.choice-btn').forEach(b => b.classList.remove('sel')); el.classList.add('sel'); lucide.createIcons() }
-    function togFn(id) {
-      const t = document.getElementById(id), k = t.querySelector('.tog-knob'), on = k.style.left === '30px';
-      k.style.left = on ? '4px' : '30px'; t.style.background = on ? 'var(--slate3)' : 'var(--teal)';
-    }
+    function togFn(id) { const t = document.getElementById(id), k = t.querySelector('.tog-knob'), on = k.style.left === '30px'; k.style.left = on ? '4px' : '30px'; t.style.background = on ? 'var(--slate3)' : 'var(--teal)' }
     function updateScale() {
       const hScale = (window.innerHeight - 48) / 780;
-      const wScale = window.innerWidth / 360;
+      const wScale = window.innerWidth / 375;
       const scale = Math.min(hScale, wScale, 1);
       document.querySelector('.wrap').style.transform = `scale(${scale})`;
     }
     window.addEventListener('resize', updateScale);
-    window.addEventListener('load', () => {
-      lucide.createIcons();
-      updateScale();
-    });
+    window.addEventListener('load', () => { lucide.createIcons(); updateScale() });
   </script>
 </body>
 
