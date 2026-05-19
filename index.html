@@ -47,15 +47,15 @@
     }
 
     .wrap {
-      aspect-ratio: 9 / 19.5;
-      height: 100%;
-      max-height: 780px;
-      max-width: 100%;
+      width: 360px;
+      height: 780px;
       background: var(--bg);
       border-radius: 40px;
       overflow: hidden;
       position: relative;
       box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+      transform-origin: center center;
     }
 
     .screen {
@@ -1464,7 +1464,17 @@
       const t = document.getElementById(id), k = t.querySelector('.tog-knob'), on = k.style.left === '30px';
       k.style.left = on ? '4px' : '30px'; t.style.background = on ? 'var(--slate3)' : 'var(--teal)';
     }
-    window.addEventListener('load', () => lucide.createIcons());
+    function updateScale() {
+      const hScale = (window.innerHeight - 48) / 780;
+      const wScale = window.innerWidth / 360;
+      const scale = Math.min(hScale, wScale, 1);
+      document.querySelector('.wrap').style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', updateScale);
+    window.addEventListener('load', () => {
+      lucide.createIcons();
+      updateScale();
+    });
   </script>
 </body>
 
