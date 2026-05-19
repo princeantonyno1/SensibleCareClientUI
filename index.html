@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px 0
+    }
+
+    :root {
+      --navy: #1B3A6B;
+      --navy2: #2D5FA6;
+      --navy3: #EEF4FF;
+      --teal: #0F9E8A;
+      --teal2: #E0F7F4;
+      --gold: #C8922A;
+      --gold2: #FDF3E3;
+      --slate: #64748B;
+      --slate2: #F1F5F9;
+      --slate3: #E2E8F0;
+      --red: #DC2626;
+      --red2: #FEF2F2;
+      --green: #16A34A;
+      --green2: #F0FDF4;
+      --white: #FFFFFF;
+      --bg: #F8FAFC;
+    }
+
+    .wrap {
+      width: 360px;
+      background: var(--bg);
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+      min-height: 760px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)
+    }
+
+    .screen {
+      display: none;
+      flex-direction: column;
+      height: 100%
+    }
+
+    .screen.active {
+      display: flex
+    }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--navy);
+      padding: 22px 22px 18px;
+      flex-shrink: 0
+    }
+
+    .topbar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .topbar-greeting {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      margin-bottom: 2px
+    }
+
+    .topbar-name {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2
+    }
+
+    .topbar-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0
+    }
+
+    .topbar-sub {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 4px
+    }
+
+    /* SCROLL AREA */
+    .scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 16px 100px;
+      scrollbar-width: none
+    }
+
+    .scroll::-webkit-scrollbar {
+      display: none
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 14px;
+      border: 1px solid var(--slate3)
+    }
+
+    .card-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      border: none;
+      position: relative;
+      overflow: hidden
+    }
+
+    .card-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04)
+    }
+
+    .card-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03)
+    }
+
+    .hero-label {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px
+    }
+
+    .hero-value {
+      color: #fff;
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.5px
+    }
+
+    .hero-sub {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 13px;
+      font-weight: 400;
+      margin-top: 8px
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px
+    }
+
+    .hero-badge {
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    /* GRID */
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--slate3)
+    }
+
+    .stat-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate);
+      text-transform: uppercase;
+      letter-spacing: 0.3px
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-top: 3px;
+      letter-spacing: -0.5px
+    }
+
+    .stat-value.green {
+      color: var(--green)
+    }
+
+    .stat-value.gold {
+      color: var(--gold)
+    }
+
+    /* SECTION TITLE */
+    .sec-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 18px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px
+    }
+
+    .sec-title i {
+      color: var(--navy2)
+    }
+
+    /* BUDGET CARD */
+    .budget-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 4px
+    }
+
+    .budget-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy)
+    }
+
+    .budget-total {
+      font-size: 11px;
+      color: var(--slate);
+      margin-top: 2px;
+      font-weight: 400
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .badge-green {
+      background: var(--green2);
+      color: var(--green)
+    }
+
+    .badge-navy {
+      background: var(--navy3);
+      color: var(--navy)
+    }
+
+    .badge-amber {
+      background: var(--gold2);
+      color: var(--gold)
+    }
+
+    .prog-track {
+      background: var(--slate2);
+      border-radius: 8px;
+      height: 10px;
+      margin: 12px 0 8px;
+      overflow: hidden
+    }
+
+    .prog-fill {
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--teal), #34D3BF);
+      transition: width 0.8s ease
+    }
+
+    .prog-fill-amber {
+      background: linear-gradient(90deg, #C8922A, #F5C26B)
+    }
+
+    .prog-foot {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600
+    }
+
+    .prog-left {
+      color: var(--teal)
+    }
+
+    .prog-right {
+      color: var(--slate)
+    }
+
+    /* ACTION BUTTONS */
+    .action-btn {
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .action-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0);
+      transition: background 0.15s
+    }
+
+    .action-btn:hover::before {
+      background: rgba(255, 255, 255, 0.1)
+    }
+
+    .action-btn:active {
+      transform: scale(0.97)
+    }
+
+    .btn-navy {
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      box-shadow: 0 4px 20px rgba(27, 58, 107, 0.3)
+    }
+
+    .btn-teal {
+      background: linear-gradient(135deg, #0B8A78, var(--teal));
+      box-shadow: 0 4px 20px rgba(15, 158, 138, 0.3)
+    }
+
+    .btn-outline {
+      background: var(--white);
+      border: 2px solid var(--navy) !important
+    }
+
+    .btn-green {
+      background: linear-gradient(135deg, #15803D, var(--green));
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3)
+    }
+
+    .btn-icon-wrap {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .btn-outline .btn-icon-wrap {
+      background: var(--navy3)
+    }
+
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+      flex: 1
+    }
+
+    .btn-main {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2
+    }
+
+    .btn-hint {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 400;
+      margin-top: 2px
+    }
+
+    .btn-outline .btn-main {
+      color: var(--navy)
+    }
+
+    .btn-outline .btn-hint {
+      color: var(--slate)
+    }
+
+    .btn-arrow {
+      color: rgba(255, 255, 255, 0.5);
+      flex-shrink: 0
+    }
+
+    .btn-outline .btn-arrow {
+      color: var(--slate)
+    }
+
+    /* INFO ROWS */
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--slate2)
+    }
+
+    .info-row:last-child {
+      border: none
+    }
+
+    .info-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .info-label {
+      font-size: 11px;
+      color: var(--slate);
+      font-weight: 500
+    }
+
+    .info-val {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 1px
+    }
+
+    /* CARE HERO */
+    .care-hero-card {
+      background: linear-gradient(135deg, var(--navy) 0%, #0D2448 100%);
+      border: none;
+      text-align: center;
+      padding: 28px 20px
+    }
+
+    .care-avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 3px solid rgba(255, 255, 255, 0.25);
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff
+    }
+
+    .care-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff
+    }
+
+    .care-role {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 4px;
+      margin-bottom: 12px
+    }
+
+    .active-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(22, 163, 74, 0.2);
+      border: 1px solid rgba(22, 163, 74, 0.4);
+      color: #4ADE80;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px
+    }
+
+    .active-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ADE80
+    }
+
+    /* FORMS */
+    .field-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px
+    }
+
+    .big-input {
+      width: 100%;
+      height: 54px;
+      border-radius: 14px;
+      border: 1.5px solid var(--slate3);
+      font-size: 16px;
+      padding: 0 16px;
+      font-family: 'Poppins', sans-serif;
+      color: var(--navy);
+      background: var(--bg);
+      outline: none;
+      margin-bottom: 14px;
+      transition: border 0.2s
+    }
+
+    .big-input:focus {
+      border-color: var(--navy)
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px
+    }
+
+    .choice-btn {
+      padding: 14px 8px;
+      border-radius: 14px;
+      border: 2px solid var(--slate3);
+      background: var(--white);
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s
+    }
+
+    .choice-btn.sel {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff
+    }
+
+    .choice-icon-wrap {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--slate2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s
+    }
+
+    .choice-btn.sel .choice-icon-wrap {
+      background: rgba(255, 255, 255, 0.15)
+    }
+
+    .tog-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--slate2)
+    }
+
+    .tog-row:last-of-type {
+      border: none
+    }
+
+    .tog-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy)
+    }
+
+    .tog-sub {
+      font-size: 12px;
+      color: var(--slate);
+      margin-top: 2px
+    }
+
+    .tog {
+      width: 54px;
+      height: 28px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+      flex-shrink: 0
+    }
+
+    .tog-knob {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      position: absolute;
+      top: 4px;
+      transition: left 0.2s;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25)
+    }
+
+    /* NOTICE */
+    .notice {
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start
+    }
+
+    .notice-amber {
+      background: var(--gold2);
+      border: 1px solid #F5C26B
+    }
+
+    .notice-blue {
+      background: var(--navy3);
+      border: 1px solid #B5D4F4
+    }
+
+    .notice-text {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.5
+    }
+
+    .notice-amber .notice-text {
+      color: #7A4E0A
+    }
+
+    .notice-blue .notice-text {
+      color: #0C447C
+    }
+
+    /* DANGER */
+    .danger-card {
+      background: var(--red2);
+      border: 2px solid #FCA5A5;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px
+    }
+
+    .danger-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--red);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .danger-text {
+      font-size: 14px;
+      color: #7F1D1D;
+      line-height: 1.6;
+      margin-bottom: 16px
+    }
+
+    .btn-red {
+      background: linear-gradient(135deg, #B91C1C, var(--red));
+      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3)
+    }
+
+    /* EMPTY */
+    .empty {
+      text-align: center;
+      padding: 32px 20px
+    }
+
+    .empty-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: var(--navy3);
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .empty-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy)
+    }
+
+    .empty-sub {
+      font-size: 14px;
+      color: var(--slate);
+      margin-top: 6px;
+      line-height: 1.6
+    }
+
+    /* QUARTER FILTER */
+    .q-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px
+    }
+
+    .q-btn {
+      padding: 16px 10px;
+      border-radius: 16px;
+      border: 2px solid var(--slate3);
+      background: var(--white);
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      transition: all 0.15s
+    }
+
+    .q-btn.sel {
+      background: var(--navy);
+      border-color: var(--navy)
+    }
+
+    .q-label {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy)
+    }
+
+    .q-sub {
+      font-size: 12px;
+      color: var(--slate);
+      margin-top: 2px
+    }
+
+    .q-btn.sel .q-label,
+    .q-btn.sel .q-sub {
+      color: #fff
+    }
+
+    /* NAV */
+    .nav {
+      background: var(--white);
+      border-top: 1px solid var(--slate3);
+      display: flex;
+      align-items: center;
+      padding: 10px 8px 14px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0
+    }
+
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 6px 2px;
+      border-radius: 12px;
+      transition: background 0.15s
+    }
+
+    .nav-btn.active {
+      background: var(--navy3)
+    }
+
+    .nav-lbl {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--slate)
+    }
+
+    .nav-btn.active .nav-lbl {
+      color: var(--navy)
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: var(--slate2);
+      margin: 4px 0 16px
+    }
+
+    /* STATUS ROW */
+    .stat-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none
+    }
+
+    .stat-pill {
+      flex-shrink: 0;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--slate3);
+      background: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate);
+      cursor: pointer;
+      transition: all 0.15s
+    }
+
+    .stat-pill.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- ═══ HOME ═══ -->
+    <div class="screen active" id="s-home">
+      <div class="topbar">
+        <div class="topbar-row" style="margin-bottom: 18px;">
+          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+          <div class="topbar-avatar">BR</div>
+        </div>
+        <div>
+          <div class="topbar-greeting">Welcome back</div>
+          <div class="topbar-name">Barry Reaper</div>
+        </div>
+      </div>
+      <div class="scroll">
+
+        <div class="card card-hero">
+          <div class="hero-label">Total Budget</div>
+          <div class="hero-value">$6,334</div>
+          <div class="hero-sub">2 active care pathways</div>
+          <div class="hero-badges">
+            <div class="hero-badge"><i data-lucide="shield-check" style="width:13px;height:13px"></i> Current</div>
+            <div class="hero-badge"><i data-lucide="users" style="width:13px;height:13px"></i> 1 Care Contact</div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:var(--green2)"><i data-lucide="trending-up"
+                style="width:20px;height:20px;color:var(--green)"></i></div>
+            <div class="stat-label">Available</div>
+            <div class="stat-value green">$2,571</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:var(--navy3)"><i data-lucide="clock"
+                style="width:20px;height:20px;color:var(--navy)"></i></div>
+            <div class="stat-label">Committed</div>
+            <div class="stat-value">$936</div>
+          </div>
+        </div>
+
+        <div class="sec-title"><i data-lucide="bar-chart-2" style="width:16px;height:16px"></i> Budget Pathways</div>
+
+        <div class="card">
+          <div class="budget-head">
+            <div>
+              <div class="budget-name">Ongoing Quarterly</div>
+              <div class="budget-total">Budget: $4,334.97</div>
+            </div>
+            <span class="badge badge-green"><i data-lucide="check-circle" style="width:10px;height:10px"></i> 22%
+              used</span>
+          </div>
+          <div class="prog-track">
+            <div class="prog-fill" style="width:22%"></div>
+          </div>
+          <div class="prog-foot">
+            <span class="prog-left">$571.77 remaining</span>
+            <span class="prog-right">$936 committed</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="budget-head">
+            <div>
+              <div class="budget-name">Assistive Technology</div>
+              <div class="budget-total">Budget: $2,000.00</div>
+            </div>
+            <span class="badge badge-navy"><i data-lucide="circle" style="width:10px;height:10px"></i> Not
+              started</span>
+          </div>
+          <div class="prog-track">
+            <div class="prog-fill" style="width:1%"></div>
+          </div>
+          <div class="prog-foot">
+            <span class="prog-left">$2,000 remaining</span>
+            <span class="prog-right">100% available</span>
+          </div>
+        </div>
+
+        <div class="sec-title"><i data-lucide="zap" style="width:16px;height:16px"></i> Quick Actions</div>
+
+        <button class="action-btn btn-navy" onclick="show('care')">
+          <div class="btn-icon-wrap"><i data-lucide="phone-call" style="width:22px;height:22px;color:#fff"></i></div>
+          <div class="btn-text">
+            <span class="btn-main">Call My Care Manager</span>
+            <span class="btn-hint">Stephany Azcarate · Active now</span>
+          </div>
+          <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
+        </button>
+
+        <button class="action-btn btn-teal" onclick="show('invoice')">
+          <div class="btn-icon-wrap"><i data-lucide="receipt" style="width:22px;height:22px;color:#fff"></i></div>
+          <div class="btn-text">
+            <span class="btn-main">View My Invoices</span>
+            <span class="btn-hint">1 pending invoice</span>
+          </div>
+          <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
+        </button>
+
+        <button class="action-btn btn-outline" onclick="show('account')">
+          <div class="btn-icon-wrap"><i data-lucide="pie-chart" style="width:22px;height:22px;color:var(--navy)"></i>
+          </div>
+          <div class="btn-text">
+            <span class="btn-main">Full Budget Summary</span>
+            <span class="btn-hint">Expenses & pathway details</span>
+          </div>
+          <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
+        </button>
+
+      </div>
+      <div class="nav" id="nav-home"></div>
+    </div>
+
+    <!-- ═══ INVOICES ═══ -->
+    <div class="screen" id="s-invoice">
+      <div class="topbar">
+        <div class="topbar-row" style="margin-bottom: 18px;">
+          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+          <div class="topbar-avatar">BR</div>
+        </div>
+        <div>
+          <div class="topbar-greeting">Billing records</div>
+          <div class="topbar-name">My Invoices</div>
+        </div>
+      </div>
+      <div class="scroll">
+
+        <div class="grid2">
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:#FEF9EC"><i data-lucide="alert-circle"
+                style="width:20px;height:20px;color:var(--gold)"></i></div>
+            <div class="stat-label">Outstanding</div>
+            <div class="stat-value gold">$145.00</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:var(--green2)"><i data-lucide="check-circle-2"
+                style="width:20px;height:20px;color:var(--green)"></i></div>
+            <div class="stat-label">Paid</div>
+            <div class="stat-value green">$520.50</div>
+          </div>
+        </div>
+
+        <button class="action-btn btn-navy" style="margin-bottom:18px">
+          <div class="btn-icon-wrap"><i data-lucide="download" style="width:22px;height:22px;color:#fff"></i></div>
+          <div class="btn-text">
+            <span class="btn-main">Download Statement</span>
+            <span class="btn-hint">Export as PDF to your phone</span>
+          </div>
+          <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
+        </button>
+
+        <div class="sec-title"><i data-lucide="calendar" style="width:16px;height:16px"></i> Filter by Quarter — 2026
+        </div>
+
+        <div class="q-grid">
+          <div class="q-btn sel" onclick="selQ(this)">
+            <div class="q-label">Q1</div>
+            <div class="q-sub">Jan – Mar</div>
+          </div>
+          <div class="q-btn" onclick="selQ(this)">
+            <div class="q-label">Q2</div>
+            <div class="q-sub">Apr – Jun</div>
+          </div>
+          <div class="q-btn" onclick="selQ(this)">
+            <div class="q-label">Q3</div>
+            <div class="q-sub">Jul – Sep</div>
+          </div>
+          <div class="q-btn" onclick="selQ(this)">
+            <div class="q-label">Q4</div>
+            <div class="q-sub">Oct – Dec</div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-pill active">All Invoices</div>
+          <div class="stat-pill" onclick="selPill(this)">Pending</div>
+          <div class="stat-pill" onclick="selPill(this)">Approved</div>
+          <div class="stat-pill" onclick="selPill(this)">Paid</div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div>
+              <div style="font-size:15px; font-weight:700; color:var(--navy);">INV-2026-042</div>
+              <div style="font-size:12px; color:var(--slate);">10 May 2026</div>
+            </div>
+            <span class="badge badge-amber"><i data-lucide="clock" style="width:10px;height:10px"></i> Pending</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div>
+              <div style="font-size:11px; color:var(--slate); font-weight:500;">Amount Due</div>
+              <div style="font-size:18px; font-weight:800; color:var(--navy);">$145.00</div>
+            </div>
+            <button
+              style="border:none;background:var(--navy3);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;">
+              <i data-lucide="download" style="width:18px;height:18px;color:var(--navy)"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div>
+              <div style="font-size:15px; font-weight:700; color:var(--navy);">INV-2026-038</div>
+              <div style="font-size:12px; color:var(--slate);">28 Apr 2026</div>
+            </div>
+            <span class="badge badge-green"><i data-lucide="check-circle" style="width:10px;height:10px"></i>
+              Paid</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div>
+              <div style="font-size:11px; color:var(--slate); font-weight:500;">Amount</div>
+              <div style="font-size:18px; font-weight:800; color:var(--navy);">$320.50</div>
+            </div>
+            <button
+              style="border:none;background:var(--navy3);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;">
+              <i data-lucide="download" style="width:18px;height:18px;color:var(--navy)"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div>
+              <div style="font-size:15px; font-weight:700; color:var(--navy);">INV-2026-035</div>
+              <div style="font-size:12px; color:var(--slate);">14 Apr 2026</div>
+            </div>
+            <span class="badge badge-green"><i data-lucide="check-circle" style="width:10px;height:10px"></i>
+              Paid</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div>
+              <div style="font-size:11px; color:var(--slate); font-weight:500;">Amount</div>
+              <div style="font-size:18px; font-weight:800; color:var(--navy);">$200.00</div>
+            </div>
+            <button
+              style="border:none;background:var(--navy3);width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;">
+              <i data-lucide="download" style="width:18px;height:18px;color:var(--navy)"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div class="nav" id="nav-invoice"></div>
+    </div>
+
+    <!-- ═══ ACCOUNT SUMMARY ═══ -->
+    <div class="screen" id="s-account">
+      <div class="topbar">
+        <div class="topbar-row" style="margin-bottom: 18px;">
+          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+          <div class="topbar-avatar">BR</div>
+        </div>
+        <div>
+          <div class="topbar-greeting">Financial overview</div>
+          <div class="topbar-name">Budget Summary</div>
+        </div>
+      </div>
+      <div class="scroll">
+
+
+        <div class="card card-hero">
+          <div class="hero-label">Total Budget</div>
+          <div class="hero-value">$6,334.97</div>
+          <div class="hero-sub">Barry Reaper · Saint Helena, 3088</div>
+          <div class="hero-badges" style="margin-top:12px">
+            <div class="hero-badge"><i data-lucide="wallet" style="width:12px;height:12px"></i> 2 pathways</div>
+            <div class="hero-badge"><i data-lucide="activity" style="width:12px;height:12px"></i> Active</div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:var(--green2)"><i data-lucide="trending-up"
+                style="width:20px;height:20px;color:var(--green)"></i></div>
+            <div class="stat-label">Remaining</div>
+            <div class="stat-value green">$2,571</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-wrap" style="background:var(--navy3)"><i data-lucide="file-text"
+                style="width:20px;height:20px;color:var(--navy)"></i></div>
+            <div class="stat-label">Claimed</div>
+            <div class="stat-value">$217.00</div>
+          </div>
+        </div>
+
+        <div class="sec-title"><i data-lucide="layers" style="width:16px;height:16px"></i> Budget Pathways</div>
+
+        <div class="card">
+          <div class="budget-head">
+            <div>
+              <div class="budget-name">Ongoing Quarterly</div>
+              <div class="budget-total">Total: $4,334.97</div>
+            </div>
+            <span class="badge badge-green"><i data-lucide="check-circle" style="width:10px;height:10px"></i> 22%
+              used</span>
+          </div>
+          <div class="prog-track">
+            <div class="prog-fill" style="width:22%"></div>
+          </div>
+          <div class="prog-foot">
+            <span class="prog-left">$571.77 remaining</span>
+            <span class="prog-right">$936 committed</span>
+          </div>
+          <div class="divider"></div>
+          <div class="grid2" style="margin:0">
+            <div style="text-align:center;padding:8px;background:var(--bg);border-radius:12px">
+              <div style="font-size:11px;color:var(--slate);font-weight:500">Claimed</div>
+              <div style="font-size:18px;font-weight:800;color:var(--navy)">$217.00</div>
+            </div>
+            <div style="text-align:center;padding:8px;background:var(--bg);border-radius:12px">
+              <div style="font-size:11px;color:var(--slate);font-weight:500">Committed</div>
+              <div style="font-size:18px;font-weight:800;color:var(--gold)">$936</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="budget-head">
+            <div>
+              <div class="budget-name">Assistive Technology</div>
+              <div class="budget-total">Total: $2,000.00</div>
+            </div>
+            <span class="badge badge-navy">Not started</span>
+          </div>
+          <div class="prog-track">
+            <div class="prog-fill" style="width:1%"></div>
+          </div>
+          <div class="prog-foot">
+            <span class="prog-left">$2,000 remaining</span>
+            <span class="prog-right">0% used</span>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="nav" id="nav-account"></div>
+    </div>
+
+    <!-- ═══ CARE MANAGER ═══ -->
+    <div class="screen" id="s-care">
+      <div class="topbar">
+        <div class="topbar-row" style="margin-bottom: 18px;">
+          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+          <div class="topbar-avatar">BR</div>
+        </div>
+        <div>
+          <div class="topbar-greeting">Your support team</div>
+          <div class="topbar-name">Care Manager</div>
+        </div>
+      </div>
+      <div class="scroll">
+
+        <div class="card care-hero-card">
+          <div class="care-avatar">SA</div>
+          <div class="care-name">Stephany Azcarate</div>
+          <div class="care-role">Primary Care Manager</div>
+          <div class="active-pill">
+            <div class="active-dot"></div> Active
+          </div>
+        </div>
+
+        <button class="action-btn btn-teal" style="margin-top:14px">
+          <div class="btn-icon-wrap"><i data-lucide="phone-call" style="width:22px;height:22px;color:#fff"></i></div>
+          <div class="btn-text">
+            <span class="btn-main">Call Care Team</span>
+            <span class="btn-hint">1300 312 772</span>
+          </div>
+          <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
+        </button>
+
+        <button class="action-btn btn-outline">
+          <div class="btn-icon-wrap"><i data-lucide="mail" style="width:22px;height:22px;color:var(--navy)"></i></div>
+          <div class="btn-text">
+            <span class="btn-main">Send an Email</span>
+            <span class="btn-hint">support@sensiblecare.com.au</span>
+          </div>
+          <i data-lucide="chevron-right" class="btn-arrow" style="width:18px;height:18px"></i>
+        </button>
+
+        <div class="card" style="margin-top:4px">
+          <div class="sec-title" style="margin:0 0 10px"><i data-lucide="info" style="width:16px;height:16px"></i>
+            Contact Details</div>
+          <div class="info-row">
+            <div class="info-icon-wrap" style="background:var(--teal2)"><i data-lucide="clock"
+                style="width:20px;height:20px;color:var(--teal)"></i></div>
+            <div>
+              <div class="info-label">Available hours</div>
+              <div class="info-val">Mon – Fri, 9 AM – 5 PM</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon-wrap" style="background:var(--navy3)"><i data-lucide="phone"
+                style="width:20px;height:20px;color:var(--navy)"></i></div>
+            <div>
+              <div class="info-label">Phone number</div>
+              <div class="info-val">1300 312 772</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon-wrap" style="background:var(--green2)"><i data-lucide="mail"
+                style="width:20px;height:20px;color:var(--green)"></i></div>
+            <div>
+              <div class="info-label">Email address</div>
+              <div class="info-val" style="font-size:13px">support@sensiblecare.com.au</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon-wrap" style="background:var(--gold2)"><i data-lucide="map-pin"
+                style="width:20px;height:20px;color:var(--gold)"></i></div>
+            <div>
+              <div class="info-label">Location</div>
+              <div class="info-val">Saint Helena, 3088</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice notice-blue">
+          <i data-lucide="lightbulb" style="width:18px;height:18px;color:var(--navy2);flex-shrink:0;margin-top:1px"></i>
+          <span class="notice-text">Outside hours? Leave a voicemail — Stephany will call you back next business
+            day.</span>
+        </div>
+
+      </div>
+      <div class="nav" id="nav-care"></div>
+    </div>
+
+    <!-- ═══ SETTINGS ═══ -->
+    <div class="screen" id="s-settings">
+      <div class="topbar">
+        <div class="topbar-row" style="margin-bottom: 18px;">
+          <img src="logo_dark.svg" height="26" alt="Sensible Care" />
+          <div class="topbar-avatar">BR</div>
+        </div>
+        <div>
+          <div class="topbar-greeting">Your preferences</div>
+          <div class="topbar-name">Settings</div>
+        </div>
+      </div>
+      <div class="scroll">
+
+        <div class="card">
+          <div class="sec-title" style="margin:0 0 14px"><i data-lucide="user-circle"
+              style="width:16px;height:16px"></i> Profile & Contact</div>
+          <div class="field-label">Preferred name</div>
+          <input class="big-input" type="text" placeholder="Barry">
+          <div class="field-label">Email address</div>
+          <input class="big-input" type="email" placeholder="reaperf@gmail.com">
+          <div class="field-label">Mobile number</div>
+          <input class="big-input" type="tel" placeholder="0409 330 071">
+
+          <div class="sec-title" style="margin:4px 0 12px"><i data-lucide="message-circle"
+              style="width:16px;height:16px"></i> Contact preference</div>
+          <div class="choice-grid">
+            <div class="choice-btn sel" onclick="selC(this,'cp')">
+              <div class="choice-icon-wrap"><i data-lucide="mail" style="width:18px;height:18px;color:var(--navy)"></i>
+              </div>
+              Email
+            </div>
+            <div class="choice-btn" onclick="selC(this,'cp')">
+              <div class="choice-icon-wrap"><i data-lucide="message-square"
+                  style="width:18px;height:18px;color:var(--slate)"></i></div>
+              SMS
+            </div>
+            <div class="choice-btn" onclick="selC(this,'cp')">
+              <div class="choice-icon-wrap"><i data-lucide="phone"
+                  style="width:18px;height:18px;color:var(--slate)"></i></div>
+              Phone
+            </div>
+            <div class="choice-btn" onclick="selC(this,'cp')">
+              <div class="choice-icon-wrap"><i data-lucide="globe"
+                  style="width:18px;height:18px;color:var(--slate)"></i></div>
+              Portal
+            </div>
+          </div>
+
+          <div class="tog-row">
+            <div>
+              <div class="tog-label">Email notifications</div>
+              <div class="tog-sub">Statements & portal updates</div>
+            </div>
+            <button class="tog" id="t1" onclick="togFn('t1')" style="background:var(--teal)">
+              <div class="tog-knob" style="left:30px"></div>
+            </button>
+          </div>
+          <div class="tog-row">
+            <div>
+              <div class="tog-label">SMS alerts</div>
+              <div class="tog-sub">Important updates by text</div>
+            </div>
+            <button class="tog" id="t2" onclick="togFn('t2')" style="background:var(--slate3)">
+              <div class="tog-knob" style="left:4px"></div>
+            </button>
+          </div>
+
+          <button class="action-btn btn-green" style="margin-top:16px;margin-bottom:0">
+            <div class="btn-icon-wrap"><i data-lucide="save" style="width:22px;height:22px;color:#fff"></i></div>
+            <div class="btn-text"><span class="btn-main">Save Changes</span></div>
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="sec-title" style="margin:0 0 14px"><i data-lucide="lock" style="width:16px;height:16px"></i>
+            Change Password</div>
+          <div class="field-label">Current password</div>
+          <input class="big-input" type="password" placeholder="••••••••">
+          <div class="field-label">New password</div>
+          <input class="big-input" type="password" placeholder="••••••••">
+          <div class="field-label">Confirm new password</div>
+          <input class="big-input" type="password" placeholder="••••••••">
+          <div class="notice notice-blue" style="margin:0 0 12px">
+            <i data-lucide="shield" style="width:16px;height:16px;color:var(--navy2);flex-shrink:0"></i>
+            <span class="notice-text">Use 8+ characters with a capital letter, number, and symbol.</span>
+          </div>
+          <button class="action-btn btn-outline" style="margin:0">
+            <div class="btn-icon-wrap"><i data-lucide="key" style="width:22px;height:22px;color:var(--navy)"></i></div>
+            <div class="btn-text"><span class="btn-main">Update Password</span></div>
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="sec-title" style="margin:0 0 10px"><i data-lucide="users" style="width:16px;height:16px"></i>
+            Family & Representatives</div>
+          <div class="empty" style="padding:16px 0 8px">
+            <div class="empty-icon" style="width:56px;height:56px"><i data-lucide="user-plus"
+                style="width:24px;height:24px;color:var(--navy)"></i></div>
+            <div class="empty-title" style="font-size:15px">No members added</div>
+            <div class="empty-sub" style="font-size:13px">Invite family or carers to help manage your account.</div>
+          </div>
+          <button class="action-btn btn-outline" style="margin:8px 0 0">
+            <div class="btn-icon-wrap"><i data-lucide="user-plus" style="width:22px;height:22px;color:var(--navy)"></i>
+            </div>
+            <div class="btn-text"><span class="btn-main">Invite a Family Member</span><span class="btn-hint"
+                style="color:var(--slate)">They'll receive an email invite</span></div>
+          </button>
+        </div>
+
+        <div class="danger-card">
+          <div class="danger-title"><i data-lucide="alert-triangle" style="width:20px;height:20px"></i> Danger Zone
+          </div>
+          <div class="danger-text">Permanently deletes your account and all associated data. This cannot be undone.
+          </div>
+          <button class="action-btn btn-red" style="margin:0;border-radius:14px">
+            <div class="btn-icon-wrap"><i data-lucide="trash-2" style="width:22px;height:22px;color:#fff"></i></div>
+            <div class="btn-text"><span class="btn-main">Delete My Account</span></div>
+          </button>
+        </div>
+
+      </div>
+      <div class="nav" id="nav-settings"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const NAV = [{ id: 'home', icon: 'home', lbl: 'Home' }, { id: 'invoice', icon: 'receipt', lbl: 'Invoices' }, { id: 'account', icon: 'pie-chart', lbl: 'Budget' }, { id: 'care', icon: 'heart-handshake', lbl: 'Care' }, { id: 'settings', icon: 'settings', lbl: 'Settings' }];
+    const screens = ['home', 'invoice', 'account', 'care', 'settings'];
+
+    screens.forEach(sid => {
+      const el = document.getElementById('nav-' + sid);
+      el.innerHTML = NAV.map(n => `<button class="nav-btn${n.id === sid ? ' active' : ''}" id="nb-${sid}-${n.id}" onclick="show('${n.id}')"><i data-lucide="${n.icon}" style="width:22px;height:22px;color:${n.id === sid ? 'var(--navy)' : 'var(--slate)'}"></i><span class="nav-lbl">${n.lbl}</span></button>`).join('');
+    });
+
+    function show(tab) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('s-' + tab).classList.add('active');
+      lucide.createIcons();
+    }
+    function selQ(el) { document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('sel')); el.classList.add('sel') }
+    function selPill(el) { el.closest('.stat-row').querySelectorAll('.stat-pill').forEach(p => p.classList.remove('active')); el.classList.add('active') }
+    function selC(el, g) { el.closest('.choice-grid').querySelectorAll('.choice-btn').forEach(b => b.classList.remove('sel')); el.classList.add('sel'); lucide.createIcons() }
+    function togFn(id) {
+      const t = document.getElementById(id), k = t.querySelector('.tog-knob'), on = k.style.left === '30px';
+      k.style.left = on ? '4px' : '30px'; t.style.background = on ? 'var(--slate3)' : 'var(--teal)';
+    }
+    window.addEventListener('load', () => lucide.createIcons());
+  </script>
+</body>
+
+</html>
