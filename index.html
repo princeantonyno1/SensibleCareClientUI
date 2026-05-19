@@ -3675,112 +3675,136 @@
 
       <div class="dv2-scroll">
 
-        <div class="sec-card">
-          <div class="sec-title" style="margin:0 0 16px"><i data-lucide="user-circle"
-              style="width:18px;height:18px"></i> Profile &amp; Contact</div>
-          <div class="field-label">Preferred Name</div>
-          <input class="big-input" type="text" placeholder="Barry">
-          <div class="field-label">Email Address</div>
-          <input class="big-input" type="email" placeholder="reaperf@gmail.com">
-          <div class="field-label">Mobile Number</div>
-          <input class="big-input" type="tel" placeholder="0409 330 071">
-
-          <div class="sec-title" style="margin:4px 0 14px"><i data-lucide="message-circle"
-              style="width:18px;height:18px"></i> Contact Preference</div>
-          <div class="choice-grid">
-            <div class="choice-btn sel" onclick="selC(this,'cp')">
-              <div class="choice-icon-wrap"><i data-lucide="mail"
-                  style="width:18px;height:18px;color:var(--primary)"></i></div>
-              Email
-            </div>
-            <div class="choice-btn" onclick="selC(this,'cp')">
-              <div class="choice-icon-wrap"><i data-lucide="message-square"
-                  style="width:18px;height:18px;color:var(--slate)"></i></div>
-              SMS
-            </div>
-            <div class="choice-btn" onclick="selC(this,'cp')">
-              <div class="choice-icon-wrap"><i data-lucide="phone"
-                  style="width:18px;height:18px;color:var(--slate)"></i></div>
-              Phone
-            </div>
-            <div class="choice-btn" onclick="selC(this,'cp')">
-              <div class="choice-icon-wrap"><i data-lucide="globe"
-                  style="width:18px;height:18px;color:var(--slate)"></i></div>
-              Portal
-            </div>
+        <div class="inv-filter-row" style="margin-bottom: 20px;">
+          <div class="inv-pill active" onclick="showSetTab('set-prof', this)"
+            style="display:flex;align-items:center;gap:6px">
+            <i data-lucide="user-circle" style="width:16px;height:16px"></i> Profile
           </div>
+          <div class="inv-pill" onclick="showSetTab('set-sec', this)" style="display:flex;align-items:center;gap:6px">
+            <i data-lucide="lock" style="width:16px;height:16px"></i> Security
+          </div>
+          <div class="inv-pill" onclick="showSetTab('set-mem', this)" style="display:flex;align-items:center;gap:6px">
+            <i data-lucide="users" style="width:16px;height:16px"></i> Members
+          </div>
+          <div class="inv-pill" onclick="showSetTab('set-sys', this)" style="display:flex;align-items:center;gap:6px">
+            <i data-lucide="settings-2" style="width:16px;height:16px"></i> System
+          </div>
+        </div>
 
-          <div class="tog-row">
-            <div>
-              <div class="tog-label">Email Notifications</div>
-              <div class="tog-sub">Statements &amp; portal updates</div>
+        <div id="set-prof" class="set-sub">
+          <div class="sec-card">
+            <div class="sec-title" style="margin:0 0 16px"><i data-lucide="user-circle"
+                style="width:18px;height:18px"></i> Profile &amp; Contact</div>
+            <div class="field-label">Preferred Name</div>
+            <input class="big-input" type="text" placeholder="Barry">
+            <div class="field-label">Email Address</div>
+            <input class="big-input" type="email" placeholder="reaperf@gmail.com">
+            <div class="field-label">Mobile Number</div>
+            <input class="big-input" type="tel" placeholder="0409 330 071">
+
+            <div class="sec-title" style="margin:4px 0 14px"><i data-lucide="message-circle"
+                style="width:18px;height:18px"></i> Contact Preference</div>
+            <div class="choice-grid">
+              <div class="choice-btn sel" onclick="selC(this,'cp')">
+                <div class="choice-icon-wrap"><i data-lucide="mail"
+                    style="width:18px;height:18px;color:var(--primary)"></i></div>
+                Email
+              </div>
+              <div class="choice-btn" onclick="selC(this,'cp')">
+                <div class="choice-icon-wrap"><i data-lucide="message-square"
+                    style="width:18px;height:18px;color:var(--slate)"></i></div>
+                SMS
+              </div>
+              <div class="choice-btn" onclick="selC(this,'cp')">
+                <div class="choice-icon-wrap"><i data-lucide="phone"
+                    style="width:18px;height:18px;color:var(--slate)"></i></div>
+                Phone
+              </div>
+              <div class="choice-btn" onclick="selC(this,'cp')">
+                <div class="choice-icon-wrap"><i data-lucide="globe"
+                    style="width:18px;height:18px;color:var(--slate)"></i></div>
+                Portal
+              </div>
             </div>
-            <button class="tog" id="t1" onclick="togFn('t1')" style="background:var(--teal)">
-              <div class="tog-knob" style="left:30px"></div>
+
+            <div class="tog-row">
+              <div>
+                <div class="tog-label">Email Notifications</div>
+                <div class="tog-sub">Statements &amp; portal updates</div>
+              </div>
+              <button class="tog" id="t1" onclick="togFn('t1')" style="background:var(--teal)">
+                <div class="tog-knob" style="left:30px"></div>
+              </button>
+            </div>
+            <div class="tog-row">
+              <div>
+                <div class="tog-label">SMS Alerts</div>
+                <div class="tog-sub">Important updates by text</div>
+              </div>
+              <button class="tog" id="t2" onclick="togFn('t2')" style="background:var(--slate3)">
+                <div class="tog-knob" style="left:4px"></div>
+              </button>
+            </div>
+
+            <button class="action-btn btn-green" style="margin-top:18px;margin-bottom:0">
+              <div class="btn-icon-wrap"><i data-lucide="save" style="width:22px;height:22px;color:#fff"></i></div>
+              <div class="btn-text"><span class="btn-main">Save Changes</span></div>
             </button>
           </div>
-          <div class="tog-row">
-            <div>
-              <div class="tog-label">SMS Alerts</div>
-              <div class="tog-sub">Important updates by text</div>
+        </div>
+
+        <div id="set-sec" class="set-sub" style="display:none">
+          <div class="sec-card">
+            <div class="sec-title" style="margin:0 0 16px"><i data-lucide="lock" style="width:18px;height:18px"></i>
+              Change Password</div>
+            <div class="field-label">Current Password</div>
+            <input class="big-input" type="password" placeholder="••••••••">
+            <div class="field-label">New Password</div>
+            <input class="big-input" type="password" placeholder="••••••••">
+            <div class="field-label">Confirm New Password</div>
+            <input class="big-input" type="password" placeholder="••••••••">
+            <div class="notice notice-blue" style="margin:0 0 14px">
+              <i data-lucide="shield" style="width:18px;height:18px;color:var(--primary2);flex-shrink:0"></i>
+              <span class="notice-text">Use 8+ characters with a capital letter, number, and symbol.</span>
             </div>
-            <button class="tog" id="t2" onclick="togFn('t2')" style="background:var(--slate3)">
-              <div class="tog-knob" style="left:4px"></div>
+            <button class="action-btn btn-outline" style="margin:0">
+              <div class="btn-icon-wrap"><i data-lucide="key" style="width:22px;height:22px;color:var(--primary)"></i>
+              </div>
+              <div class="btn-text"><span class="btn-main">Update Password</span></div>
             </button>
           </div>
-
-          <button class="action-btn btn-green" style="margin-top:18px;margin-bottom:0">
-            <div class="btn-icon-wrap"><i data-lucide="save" style="width:22px;height:22px;color:#fff"></i></div>
-            <div class="btn-text"><span class="btn-main">Save Changes</span></div>
-          </button>
         </div>
 
-        <div class="sec-card">
-          <div class="sec-title" style="margin:0 0 16px"><i data-lucide="lock" style="width:18px;height:18px"></i>
-            Change Password</div>
-          <div class="field-label">Current Password</div>
-          <input class="big-input" type="password" placeholder="••••••••">
-          <div class="field-label">New Password</div>
-          <input class="big-input" type="password" placeholder="••••••••">
-          <div class="field-label">Confirm New Password</div>
-          <input class="big-input" type="password" placeholder="••••••••">
-          <div class="notice notice-blue" style="margin:0 0 14px">
-            <i data-lucide="shield" style="width:18px;height:18px;color:var(--primary2);flex-shrink:0"></i>
-            <span class="notice-text">Use 8+ characters with a capital letter, number, and symbol.</span>
-          </div>
-          <button class="action-btn btn-outline" style="margin:0">
-            <div class="btn-icon-wrap"><i data-lucide="key" style="width:22px;height:22px;color:var(--primary)"></i>
+        <div id="set-mem" class="set-sub" style="display:none">
+          <div class="sec-card">
+            <div class="sec-title" style="margin:0 0 12px"><i data-lucide="users" style="width:18px;height:18px"></i>
+              Members</div>
+            <div class="empty" style="padding:14px 0 10px">
+              <div class="empty-icon" style="width:58px;height:58px"><i data-lucide="user-plus"
+                  style="width:26px;height:26px;color:var(--primary)"></i></div>
+              <div class="empty-title" style="font-size:16px">No members added</div>
+              <div class="empty-sub" style="font-size:14px">Invite family or carers to help manage your account.</div>
             </div>
-            <div class="btn-text"><span class="btn-main">Update Password</span></div>
-          </button>
+            <button class="action-btn btn-outline" style="margin:8px 0 0">
+              <div class="btn-icon-wrap"><i data-lucide="user-plus"
+                  style="width:22px;height:22px;color:var(--primary)"></i></div>
+              <div class="btn-text"><span class="btn-main">Invite a Family Member</span><span class="btn-hint"
+                  style="color:var(--slate)">They'll receive an email invite</span></div>
+            </button>
+          </div>
         </div>
 
-        <div class="sec-card">
-          <div class="sec-title" style="margin:0 0 12px"><i data-lucide="users" style="width:18px;height:18px"></i>
-            Family &amp; Representatives</div>
-          <div class="empty" style="padding:14px 0 10px">
-            <div class="empty-icon" style="width:58px;height:58px"><i data-lucide="user-plus"
-                style="width:26px;height:26px;color:var(--primary)"></i></div>
-            <div class="empty-title" style="font-size:16px">No members added</div>
-            <div class="empty-sub" style="font-size:14px">Invite family or carers to help manage your account.</div>
+        <div id="set-sys" class="set-sub" style="display:none">
+          <div class="danger-card">
+            <div class="danger-title"><i data-lucide="alert-triangle" style="width:20px;height:20px"></i> Danger Zone
+            </div>
+            <div class="danger-text">Permanently deletes your account and all associated data. This cannot be undone.
+            </div>
+            <button class="action-btn btn-red" style="margin:0;border-radius:14px">
+              <div class="btn-icon-wrap"><i data-lucide="trash-2" style="width:22px;height:22px;color:#fff"></i></div>
+              <div class="btn-text"><span class="btn-main">Delete My Account</span></div>
+            </button>
           </div>
-          <button class="action-btn btn-outline" style="margin:8px 0 0">
-            <div class="btn-icon-wrap"><i data-lucide="user-plus"
-                style="width:22px;height:22px;color:var(--primary)"></i></div>
-            <div class="btn-text"><span class="btn-main">Invite a Family Member</span><span class="btn-hint"
-                style="color:var(--slate)">They'll receive an email invite</span></div>
-          </button>
-        </div>
-
-        <div class="danger-card">
-          <div class="danger-title"><i data-lucide="alert-triangle" style="width:20px;height:20px"></i> Danger Zone
-          </div>
-          <div class="danger-text">Permanently deletes your account and all associated data. This cannot be undone.
-          </div>
-          <button class="action-btn btn-red" style="margin:0;border-radius:14px">
-            <div class="btn-icon-wrap"><i data-lucide="trash-2" style="width:22px;height:22px;color:#fff"></i></div>
-            <div class="btn-text"><span class="btn-main">Delete My Account</span></div>
-          </button>
         </div>
 
       </div>
@@ -3803,6 +3827,7 @@
     function selInvPill(el) { el.closest('.inv-filter-row').querySelectorAll('.inv-pill').forEach(p => p.classList.remove('active')); el.classList.add('active') }
     function selC(el, g) { el.closest('.choice-grid').querySelectorAll('.choice-btn').forEach(b => b.classList.remove('sel')); el.classList.add('sel'); lucide.createIcons() }
     function bv2SelQ(el) { el.closest('.bv2-q-grid').querySelectorAll('.bv2-q-tile').forEach(t => t.classList.remove('sel')); el.classList.add('sel') }
+    function showSetTab(id, el) { document.querySelectorAll('.set-sub').forEach(s => s.style.display = 'none'); document.getElementById(id).style.display = 'block'; el.closest('.inv-filter-row').querySelectorAll('.inv-pill').forEach(p => p.classList.remove('active')); el.classList.add('active'); lucide.createIcons() }
     function togFn(id) { const t = document.getElementById(id), k = t.querySelector('.tog-knob'), on = k.style.left === '30px'; k.style.left = on ? '4px' : '30px'; t.style.background = on ? 'var(--slate3)' : 'var(--teal)' }
     function updateScale() {
       const availH = window.innerHeight - 64;
